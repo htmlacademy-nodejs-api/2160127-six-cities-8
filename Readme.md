@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Анур Фаттахов](https://up.htmlacademy.ru/nodejs-api/8/user/2160127).
-* Наставник: `Неизвестно`.
+- Студент: [Анур Фаттахов](https://up.htmlacademy.ru/nodejs-api/8/user/2160127).
+- Наставник: [Андрей Осипук](https://htmlacademy.ru/profile/id616431).
 
 ---
 
