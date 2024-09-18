@@ -1,2 +1,3 @@
-Наименование	Описание предложения	14.09.2024	14.09.2024	Paris	preview/1.img	foto/1.img,foto/2.img,foto/3.img,foto/4.img,foto/5.img,foto/6.img	true	false	4	apartment	1	2	10000	Breakfast,Baby seat	User1	0	latitude: 48.85661, longitude: 2.351499
-Наименование1	Описание предложения1	13.09.2024	14.09.2024	Cologne	preview/1.img	foto/1.img,foto/2.img,foto/3.img,foto/4.img,foto/5.img,foto/6.img	true	false	4	apartment	1	2	10000	Breakfast,Baby seat	User1	0	latitude: 50.938361, longitude: 6.959974
+Наименование	Описание предложения	2024-09-18	Paris	preview/1.img	foto/1.img;foto/2.img;foto/3.img;foto/4.img;foto/5.img;foto/6.img	true	false	4	apartment	1	2	10000	Breakfast;Baby seat	User1;User1@mail.ru;foto.img;passworD;normal	0	48.85661;2.351499
+Наименование1	Описание предложения1	2024-09-18	Cologne	preview/1.img	foto/1.img;foto/2.img;foto/3.img;foto/4.img;foto/5.img;foto/6.img	true	false	4	apartment	1	2	10000	Breakfast;Baby seat	User2;User2@mail.ru;foto1.img;paSsworD;pro	0	50.938361;6.959974
+

@@ -1,22 +1,31 @@
-import {Command} from './command.interfae.js';
-import {readFileSync} from 'node:fs';
-import {resolve} from 'node:path';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+import { Command } from './command.interface.js';
 
 type PackageJSONConfig = {
   version: string;
-};
+}
 
-const isPackageJSOnConfig = (value: unknown): value is PackageJSONConfig =>
-  typeof value === 'object' && !Array.isArray(value) && value !== null && Object.hasOwn(value, 'version');
+function isPackageJSONConfig(value: unknown): value is PackageJSONConfig {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    !Array.isArray(value) &&
+    Object.hasOwn(value, 'version')
+  );
+}
 
 export class VersionCommand implements Command {
-  constructor(private readonly filePath: string = 'package.json') {}
+  constructor(
+    private readonly filePath: string = 'package.json'
+  ) {}
 
   private readVersion(): string {
-    const jsonContent = readFileSync(resolve(this.filePath), {encoding: 'utf-8'});
-    const importedContent = JSON.parse(jsonContent);
+    const jsonContent = readFileSync(resolve(this.filePath), 'utf-8');
+    const importedContent: unknown = JSON.parse(jsonContent);
 
-    if (isPackageJSOnConfig(importedContent)) {
+    if (! isPackageJSONConfig(importedContent)) {
       throw new Error('Failed to parse json content.');
     }
 
