@@ -1,26 +1,23 @@
-import { IFileReader } from './file-reader.interface.js';
-import { IOffer, IUser, ILocation } from '../../types/entities.types.js';
-import { readFileSync } from 'node:fs';
-
+import {IFileReader} from './file-reader.interface.js';
+import {IOffer, IUser, ILocation} from '../../types/entities.types.js';
+import {readFileSync} from 'node:fs';
+import chalk from 'chalk';
 
 export class TVSFileReader implements IFileReader {
-
   private rawData = '';
 
-  constructor(
-    private readonly fileName: string
-  ) { }
+  constructor(private readonly fileName: string) {}
 
   private validateRowData(): void {
     if (!this.rawData) {
-      throw new Error('File was not read');
+      throw new Error(chalk.bgRed.bold('File was not read'));
     }
   }
 
   private parseRawDataToOffers(): IOffer[] {
     return this.rawData
       .split('\n')
-      .filter((row) => row.trim().replace(/[\r]+/g, '').length > 0)
+      .filter((row) => row.trim().length > 0)
       .map((row) => this.parseLineToOffer(row));
   }
 
@@ -68,14 +65,14 @@ export class TVSFileReader implements IFileReader {
 
   private parseUser(author: string): IUser {
     const [name, email, avatar, password, userType] = author.split(';');
-    return { name, email, avatar, password, userType: userType === 'normal' ? 'normal' : 'pro' };
+    return {name, email, avatar, password, userType: userType === 'normal' ? 'normal' : 'pro'};
   }
 
   private parseLocation(location: string): ILocation {
     const [latitude, longitude] = location.split(';');
     return {
       latitude,
-      longitude,
+      longitude
     };
   }
 
