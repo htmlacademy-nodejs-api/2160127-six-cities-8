@@ -1,5 +1,5 @@
 import {IFileReader} from './file-reader.interface.js';
-import {OfferType, UserType, LocationType} from '../../types/entities.types.js';
+import {OfferType, LocationType, OfferTypeEnum, FeaturesTypeEnum} from '#shared/types/entities.types.js';
 import {readFileSync} from 'node:fs';
 import chalk from 'chalk';
 
@@ -25,8 +25,9 @@ export class TVSFileReader implements IFileReader {
     const [
       title,
       description,
-      publDate,
+      postDate,
       city,
+      cityLocation,
       previewImage,
       images,
       isPremium,
@@ -37,40 +38,59 @@ export class TVSFileReader implements IFileReader {
       quests,
       price,
       features,
-      author,
-      comments,
-      location
+      userName,
+      avatarUrl,
+      password,
+      isPro,
+      email,
+      location,
+      comments
     ] = row.split('\t');
 
     return {
       title,
       description,
-      date: new Date(publDate),
-      city,
+      date: new Date(postDate),
+      city: { name: city, location: this.parseLocation(cityLocation)},
       previewImage,
       images: images.split(';'),
-      isPremium: isPremium === 'true',
+      isPremium: this.parseBoolean(isPremium),
       isFavorite: isFavorite === 'true',
       rating: parseInt(rating, 10),
-      hostType,
+      hostType: OfferTypeEnum[hostType as OfferTypeEnum],
       bedrooms: parseInt(rooms, 10),
       quests: parseInt(quests, 10),
       price: parseInt(price, 10),
-      features: features.split(';'),
-      author: this.parseUser(author),
+      features: this.parseFeatures(features),
+      author: { name: userName, avatar:  avatarUrl, isPro: this.parseBoolean(isPro), email, password },
       comments: parseInt(comments, 10),
       location: this.parseLocation(location)
     };
   }
 
-  private parseUser(author: string): UserType {
-    const [name, email, avatar, password, userType] = author.split(';');
-    return {name, email, avatar, password, userType: userType === 'normal' ? 'normal' : 'pro'};
+  private parseBoolean(value: string): boolean {
+    return value.toLowerCase() === 'true';
   }
+
+  // private parseUser(author: string, email: string, avatar:string): UserType {
+  //   const [name, email, avatar, password, userType] = author.split(';');
+  //   return {name, email, avatar, password, userType: userType === 'normal' ? 'normal' : 'pro'};
+  // }
 
   private parseLocation(location: string): LocationType {
     const [latitude, longitude] = location.split(',').map((coord) => Number(coord));
     return {latitude, longitude};
+  }
+
+  private parseFeatures(features: string): FeaturesTypeEnum[] {
+    return features.split(',').map((name) => {
+      const featuresEnumValue = FeaturesTypeEnum[name.trim() as FeaturesTypeEnum];
+      if (featuresEnumValue) {
+        return featuresEnumValue;
+      } else {
+        throw new Error(`Invalid features: ${name}`);
+      }
+    });
   }
 
   public read(): void {
@@ -82,3 +102,4 @@ export class TVSFileReader implements IFileReader {
     return this.parseRawDataToOffers();
   }
 }
+

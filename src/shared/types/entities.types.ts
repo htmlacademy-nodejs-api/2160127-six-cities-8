@@ -3,40 +3,30 @@ export type UserType = {
   email: string;
   avatar: string;
   password: string;
-  userType: string;
-};
+  isPro: boolean;
+}
 
 export type CommentsType = {
   comment: string;
   date: string;
   rating: number;
   author: UserType;
-};
+}
 
 export type LocationType = {
   latitude: number;
   longitude: number;
-};
+}
 
-export type OfferType = {
-  title: string;
-  description: string;
-  date: Date;
-  city: string;
-  previewImage: string;
-  images: string[];
-  isPremium: boolean;
-  isFavorite: boolean;
-  rating: number;
-  hostType: string;
-  bedrooms: number;
-  quests: number;
-  price: number;
-  features: string[];
-  author: UserType;
-  comments: number;
-  location: LocationType;
-};
+export type Location = {
+  latitude: number;
+  longitude: number;
+}
+
+export type City = {
+  name: string;
+  location: Location;
+}
 
 export enum OfferTypeEnum {
   apartment = 'apartment',
@@ -44,3 +34,36 @@ export enum OfferTypeEnum {
   room = 'room',
   hotel = 'hotel'
 }
+
+export enum FeaturesTypeEnum {
+  'Breakfast' = 'Breakfast',
+  'Air conditioning' = 'Air conditioning',
+  'Laptop friendly workspace' = 'Laptop friendly workspace',
+  'Baby seat' = 'Baby seat',
+  'Washer' = 'Washer',
+  'Towels' = 'Towels',
+  'Fridge' = 'Fridge',
+}
+
+
+export type OfferType = {
+  title: string;
+  description: string;
+  date: Date;
+  city: City;
+  previewImage: string;
+  images: string[];
+  isPremium: boolean;
+  isFavorite: boolean;
+  rating: number;
+  hostType: OfferTypeEnum;
+  bedrooms: number;
+  quests: number;
+  price: number;
+  features: FeaturesTypeEnum[];
+  author: UserType;
+  comments: number;
+  location: LocationType;
+};
+
+

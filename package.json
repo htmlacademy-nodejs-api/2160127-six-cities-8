@@ -33,6 +33,7 @@
     "node": "^20.0.0",
     "npm": ">=10"
   },
+  "imports": {    "#*": "./src/*"  },
   "dependencies": {
     "chalk": "^5.3.0",
     "dayjs": "1.11.13",

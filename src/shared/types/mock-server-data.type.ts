@@ -9,6 +9,6 @@ export type MockServerDataType = {
   coordinates: string[];
   users: string[];
   emails: string[];
-  tokens: string[];
+  passwords: string[];
   avatars: string[];
 };

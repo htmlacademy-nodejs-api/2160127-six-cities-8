@@ -8,7 +8,7 @@ export const RoomLimit = {
   Max: 8
 };
 
-export const AdultLimit = {
+export const QuestsLimit = {
   Min: 1,
   Max: 10
 };
@@ -22,3 +22,9 @@ export const ImageLimit = {
   Min: 0,
   Max: 6
 };
+
+export const CommentsLimit = {
+  Min: 0,
+  Max: 15
+};
+
