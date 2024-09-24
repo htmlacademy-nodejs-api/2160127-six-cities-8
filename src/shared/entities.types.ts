@@ -13,7 +13,7 @@ export interface IComments {
   author: IUser;
 }
 
-export interface Location {
+export interface ILocation {
   latitude: number;
   longitude: number;
 }
@@ -35,5 +35,5 @@ export interface IOffer {
   goods: string[];
   host: IUser;
   comments: number;
-  location: Location;
+  location: ILocation;
 }

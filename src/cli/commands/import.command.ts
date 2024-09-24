@@ -1,8 +1,8 @@
-import {Command} from './command.interface.js';
+import {ICommand} from './command.interface.js';
 import {TVSFileReader} from '../../shared/libs/file-reader/index.js';
 import chalk from 'chalk';
 
-export class ImportCommand implements Command {
+export class ImportCommand implements ICommand {
   public getName(): string {
     return '--import';
   }

@@ -1,7 +1,7 @@
-import {Command} from './command.interface.js';
+import {ICommand} from './command.interface.js';
 import chalk from 'chalk';
 
-export class HelpCommand implements Command {
+export class HelpCommand implements ICommand {
   public getName(): string {
     return '--help';
   }
