@@ -20,18 +20,12 @@
     "sourceMap": true,
     "outDir": "./dist",
     "emitDecoratorMetadata": true,
-    "types": [
-      "node",
-    ],
-    "lib": [
-      "ESNext"
-    ]
+    "types": ["node"],
+    "lib": ["ESNext"],
+    "paths": {
+      "src/*": ["./src/*"]
+    }
   },
-  "include": [
-    "src/**/*.ts"
-, "src/cli/commands/command.interface.js"  ],
-  "exclude": [
-    "node_modules",
-    "**/*.test.ts"
-  ]
+  "include": ["src/**/*.ts", "src/cli/commands/command.interface.js"],
+  "exclude": ["node_modules", "**/*.test.ts"]
 }

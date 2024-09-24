@@ -1,27 +1,27 @@
-export interface IUser {
+export type UserType = {
   name: string;
   email: string;
   avatar: string;
   password: string;
-  userType: 'normal' | 'pro';
-}
+  userType: string;
+};
 
-export interface IComments {
+export type CommentsType = {
   comment: string;
   date: string;
   rating: number;
-  author: IUser;
-}
+  author: UserType;
+};
 
-export interface ILocation {
-  latitude: string;
-  longitude: string;
-}
+export type LocationType = {
+  latitude: number;
+  longitude: number;
+};
 
-export interface IOffer {
+export type OfferType = {
   title: string;
   description: string;
-  postDate: Date;
+  date: Date;
   city: string;
   previewImage: string;
   images: string[];
@@ -33,7 +33,14 @@ export interface IOffer {
   quests: number;
   price: number;
   features: string[];
-  author: IUser;
+  author: UserType;
   comments: number;
-  location: ILocation;
+  location: LocationType;
+};
+
+export enum OfferTypeEnum {
+  apartment = 'apartment',
+  house = 'house',
+  room = 'room',
+  hotel = 'hotel'
 }

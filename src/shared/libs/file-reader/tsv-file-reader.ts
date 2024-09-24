@@ -1,5 +1,5 @@
 import {IFileReader} from './file-reader.interface.js';
-import {IOffer, IUser, ILocation} from '../../types/entities.types.js';
+import {OfferType, UserType, LocationType} from '../../types/entities.types.js';
 import {readFileSync} from 'node:fs';
 import chalk from 'chalk';
 
@@ -14,14 +14,14 @@ export class TVSFileReader implements IFileReader {
     }
   }
 
-  private parseRawDataToOffers(): IOffer[] {
+  private parseRawDataToOffers(): OfferType[] {
     return this.rawData
       .split('\n')
       .filter((row) => row.trim().length > 0)
       .map((row) => this.parseLineToOffer(row));
   }
 
-  private parseLineToOffer(row: string): IOffer {
+  private parseLineToOffer(row: string): OfferType {
     const [
       title,
       description,
@@ -45,7 +45,7 @@ export class TVSFileReader implements IFileReader {
     return {
       title,
       description,
-      postDate: new Date(publDate),
+      date: new Date(publDate),
       city,
       previewImage,
       images: images.split(';'),
@@ -63,24 +63,21 @@ export class TVSFileReader implements IFileReader {
     };
   }
 
-  private parseUser(author: string): IUser {
+  private parseUser(author: string): UserType {
     const [name, email, avatar, password, userType] = author.split(';');
     return {name, email, avatar, password, userType: userType === 'normal' ? 'normal' : 'pro'};
   }
 
-  private parseLocation(location: string): ILocation {
-    const [latitude, longitude] = location.split(';');
-    return {
-      latitude,
-      longitude
-    };
+  private parseLocation(location: string): LocationType {
+    const [latitude, longitude] = location.split(',').map((coord) => Number(coord));
+    return {latitude, longitude};
   }
 
   public read(): void {
     this.rawData = readFileSync(this.fileName, {encoding: 'utf-8'});
   }
 
-  public toArray(): IOffer[] {
+  public toArray(): OfferType[] {
     this.validateRowData();
     return this.parseRawDataToOffers();
   }
