@@ -1,7 +1,7 @@
 import {IOfferGenerator} from './offer-generator.interface.js';
-import {MockServerDataType} from 'src/shared/types/mock-server-data.type.js';
-import {OfferTypeEnum} from 'src/shared/types/entities.types.js';
-import {getRandomDate, getRandomItem, getRandomItems, getRandomBoolean, getRandomInRange} from 'src/shared/helpers/common.js';
+import {MockServerDataType} from '../../types/mock-server-data.type.js';
+import {OfferTypeEnum} from '../../types/entities.types.js';
+import {getRandomDate, getRandomItem, getRandomItems, getRandomBoolean, getRandomInRange} from '../../helpers/common.js';
 import {PriceLimit, RatingLimit, RoomLimit, AdultLimit} from './const.js';
 
 export class TSVOfferGenerator implements IOfferGenerator {
@@ -11,7 +11,7 @@ export class TSVOfferGenerator implements IOfferGenerator {
     const title = getRandomItem<string>(this.mockData.titles);
     const description = getRandomItem<string>(this.mockData.descriptions);
     const postDate = getRandomDate().toISOString();
-    const previewImage = getRandomItem<string>(this.mockData.previewImages);
+    const previewImage = getRandomItem<string>(this.mockData.previews);
     const images = getRandomItems<string>(this.mockData.images);
     const isPremium = getRandomBoolean();
     const isFavorite = getRandomBoolean();
@@ -25,7 +25,6 @@ export class TSVOfferGenerator implements IOfferGenerator {
     const avatarUrl = getRandomItem<string>(this.mockData.avatars);
     const isPro = getRandomBoolean();
     const email = getRandomItem<string>(this.mockData.emails);
-    const token = getRandomItem<string>(this.mockData.tokens);
     const city = getRandomItem<string>(this.mockData.cities);
     const cityLocation = getRandomItem<string>(this.mockData.coordinates);
     const location = getRandomItem<string>(this.mockData.coordinates);
@@ -50,7 +49,6 @@ export class TSVOfferGenerator implements IOfferGenerator {
       avatarUrl,
       isPro,
       email,
-      token,
       location
     ].join('\t');
   }

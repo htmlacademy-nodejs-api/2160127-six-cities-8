@@ -32,6 +32,15 @@
       "RL_now-cooking@yahoo.com",
       "amanda-fox@yahoo.com"
     ],
-    "avatars": ["avatar-tom.jpg", "avatar-john.jpg", "avatar-max.jpg", "avatar-male.jpg", "avatar-female.jpg", "avatar-amanda.jpg"]
+    "avatars": ["avatar-tom.jpg", "avatar-john.jpg", "avatar-max.jpg", "avatar-male.jpg", "avatar-female.jpg", "avatar-amanda.jpg"],
+    "cities": ["Kuznechikha", "Kapuskasing", "Pandanwangi", "Repki", "Beopwon", "White Rock"],
+    "coordinates": [
+      "48.85661,2.351499",
+      "50.938361,6.959974",
+      "50.846557,4.351697",
+      "52.370216,4.895168",
+      "53.550341,10.000654",
+      "51.225402,6.776314"
+    ]
   }
 }

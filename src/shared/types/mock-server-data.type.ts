@@ -2,7 +2,7 @@ export type MockServerDataType = {
   titles: string[];
   descriptions: string[];
   cities: string[];
-  previewImages: string[];
+  previews: string[];
   images: string[];
   offerTypes: string[];
   features: string[];
