@@ -1,25 +1,19 @@
-import {IFileReader} from './file-reader.interface.js';
+// import {IFileReader} from './file-reader.interface.js';
+import { createReadStream } from 'node:fs';
 import {OfferType, LocationType, OfferTypeEnum, FeaturesTypeEnum} from '#shared/types/entities.types.js';
-import {readFileSync} from 'node:fs';
-import chalk from 'chalk';
+//import {readFileSync} from 'node:fs';
+import EventEmitter from 'node:events';
+// import chalk from 'chalk';
 
-export class TVSFileReader implements IFileReader {
-  private rawData = '';
+export class TVSFileReader extends EventEmitter {
+  private CHUNK_SIZE = 16384; // 16KB
 
-  constructor(private readonly fileName: string) {}
-
-  private validateRowData(): void {
-    if (!this.rawData) {
-      throw new Error(chalk.bgRed.bold('File was not read'));
-    }
+  constructor(
+    private readonly filename: string
+  ) {
+    super();
   }
 
-  private parseRawDataToOffers(): OfferType[] {
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim().length > 0)
-      .map((row) => this.parseLineToOffer(row));
-  }
 
   private parseLineToOffer(row: string): OfferType {
     const [
@@ -93,13 +87,29 @@ export class TVSFileReader implements IFileReader {
     });
   }
 
-  public read(): void {
-    this.rawData = readFileSync(this.fileName, {encoding: 'utf-8'});
-  }
+  public async read(): Promise<void> {
+    const readStream = createReadStream(this.filename, {
+      highWaterMark: this.CHUNK_SIZE,
+      encoding: 'utf-8',
+    });
 
-  public toArray(): OfferType[] {
-    this.validateRowData();
-    return this.parseRawDataToOffers();
+    let remainingData = '';
+    let nextLinePosition = -1;
+    let importedRowCount = 0;
+
+    for await (const chunk of readStream) {
+      remainingData += chunk.toString();
+
+      while ((nextLinePosition = remainingData.indexOf('\n')) >= 0) {
+        const completeRow = remainingData.slice(0, nextLinePosition + 1);
+        remainingData = remainingData.slice(++nextLinePosition);
+        importedRowCount++;
+
+        const parsedOffer = this.parseLineToOffer(completeRow);
+        this.emit('line', parsedOffer);
+      }
+    }
+    this.emit('end', importedRowCount);
   }
 }
 
