@@ -1,32 +1,27 @@
-import {IFileReader} from './file-reader.interface.js';
-import {IOffer, IUser, ILocation} from '../../types/entities.types.js';
-import {readFileSync} from 'node:fs';
-import chalk from 'chalk';
+// import {IFileReader} from './file-reader.interface.js';
+import { createReadStream } from 'node:fs';
+import {OfferType, LocationType, OfferTypeEnum, FeaturesTypeEnum} from '#shared/types/entities.types.js';
+//import {readFileSync} from 'node:fs';
+import EventEmitter from 'node:events';
+// import chalk from 'chalk';
 
-export class TVSFileReader implements IFileReader {
-  private rawData = '';
+export class TVSFileReader extends EventEmitter {
+  private CHUNK_SIZE = 16384; // 16KB
 
-  constructor(private readonly fileName: string) {}
-
-  private validateRowData(): void {
-    if (!this.rawData) {
-      throw new Error(chalk.bgRed.bold('File was not read'));
-    }
+  constructor(
+    private readonly filename: string
+  ) {
+    super();
   }
 
-  private parseRawDataToOffers(): IOffer[] {
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim().length > 0)
-      .map((row) => this.parseLineToOffer(row));
-  }
 
-  private parseLineToOffer(row: string): IOffer {
+  private parseLineToOffer(row: string): OfferType {
     const [
       title,
       description,
-      publDate,
+      postDate,
       city,
+      cityLocation,
       previewImage,
       images,
       isPremium,
@@ -37,51 +32,84 @@ export class TVSFileReader implements IFileReader {
       quests,
       price,
       features,
-      author,
-      comments,
-      location
+      userName,
+      avatarUrl,
+      password,
+      isPro,
+      email,
+      location,
+      comments
     ] = row.split('\t');
 
     return {
       title,
       description,
-      postDate: new Date(publDate),
-      city,
+      date: new Date(postDate),
+      city: { name: city, location: this.parseLocation(cityLocation)},
       previewImage,
       images: images.split(';'),
-      isPremium: isPremium === 'true',
+      isPremium: this.parseBoolean(isPremium),
       isFavorite: isFavorite === 'true',
       rating: parseInt(rating, 10),
-      hostType,
+      hostType: OfferTypeEnum[hostType as OfferTypeEnum],
       bedrooms: parseInt(rooms, 10),
       quests: parseInt(quests, 10),
       price: parseInt(price, 10),
-      features: features.split(';'),
-      author: this.parseUser(author),
+      features: this.parseFeatures(features),
+      author: { name: userName, avatar:  avatarUrl, isPro: this.parseBoolean(isPro), email, password },
       comments: parseInt(comments, 10),
       location: this.parseLocation(location)
     };
   }
 
-  private parseUser(author: string): IUser {
-    const [name, email, avatar, password, userType] = author.split(';');
-    return {name, email, avatar, password, userType: userType === 'normal' ? 'normal' : 'pro'};
+  private parseBoolean(value: string): boolean {
+    return value.toLowerCase() === 'true';
   }
 
-  private parseLocation(location: string): ILocation {
-    const [latitude, longitude] = location.split(';');
-    return {
-      latitude,
-      longitude
-    };
+  // private parseUser(author: string, email: string, avatar:string): UserType {
+  //   const [name, email, avatar, password, userType] = author.split(';');
+  //   return {name, email, avatar, password, userType: userType === 'normal' ? 'normal' : 'pro'};
+  // }
+
+  private parseLocation(location: string): LocationType {
+    const [latitude, longitude] = location.split(',').map((coord) => Number(coord));
+    return {latitude, longitude};
   }
 
-  public read(): void {
-    this.rawData = readFileSync(this.fileName, {encoding: 'utf-8'});
+  private parseFeatures(features: string): FeaturesTypeEnum[] {
+    return features.split(',').map((name) => {
+      const featuresEnumValue = FeaturesTypeEnum[name.trim() as FeaturesTypeEnum];
+      if (featuresEnumValue) {
+        return featuresEnumValue;
+      } else {
+        throw new Error(`Invalid features: ${name}`);
+      }
+    });
   }
 
-  public toArray(): IOffer[] {
-    this.validateRowData();
-    return this.parseRawDataToOffers();
+  public async read(): Promise<void> {
+    const readStream = createReadStream(this.filename, {
+      highWaterMark: this.CHUNK_SIZE,
+      encoding: 'utf-8',
+    });
+
+    let remainingData = '';
+    let nextLinePosition = -1;
+    let importedRowCount = 0;
+
+    for await (const chunk of readStream) {
+      remainingData += chunk.toString();
+
+      while ((nextLinePosition = remainingData.indexOf('\n')) >= 0) {
+        const completeRow = remainingData.slice(0, nextLinePosition + 1);
+        remainingData = remainingData.slice(++nextLinePosition);
+        importedRowCount++;
+
+        const parsedOffer = this.parseLineToOffer(completeRow);
+        this.emit('line', parsedOffer);
+      }
+    }
+    this.emit('end', importedRowCount);
   }
 }
+

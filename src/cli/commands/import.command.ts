@@ -1,27 +1,34 @@
-import {Command} from './command.interface.js';
+import {ICommand} from './command.interface.js';
 import {TVSFileReader} from '../../shared/libs/file-reader/index.js';
 import chalk from 'chalk';
+import { OfferType } from '../../shared/types/entities.types.js';
+import { getErrorMessage } from '../../shared/helpers/common.js';
 
-export class ImportCommand implements Command {
+export class ImportCommand implements ICommand {
+  private onImportedOffer(offer: OfferType): void {
+    console.info(offer);
+  }
+
+  private onCompleteImport(count: number) {
+    console.info(chalk.green(`${count} rows imported.`));
+  }
+
   public getName(): string {
     return '--import';
   }
 
-  public execute(...parameters: string[]): void {
-    // Чтение файла
+  public async execute(...parameters: string[]): Promise<void> {
     const [filename] = parameters;
     const fileReader = new TVSFileReader(filename.trim());
 
+    fileReader.on('line', this.onImportedOffer);
+    fileReader.on('end', this.onCompleteImport);
+
     try {
       fileReader.read();
-      console.log(fileReader.toArray());
-    } catch (err) {
-      if (!(err instanceof Error)) {
-        throw err;
-      }
-
+    } catch (error) {
       console.error(chalk.bgRed.bold(`Can't import data from file: ${filename}`));
-      console.error(chalk.bgRed.bold(`Details: ${err.message}`));
+      console.error(chalk.bgRed.bold(getErrorMessage(error)));
     }
   }
 }

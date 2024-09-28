@@ -1,39 +1,69 @@
-export interface IUser {
-    name: string;
-    email: string;
-    avatar: string;
-    password: string;
-    userType: 'normal' | 'pro';
-  }
+export type UserType = {
+  name: string;
+  email: string;
+  avatar: string;
+  password: string;
+  isPro: boolean;
+}
 
-export interface IComments {
-    comment: string;
-    date: string;
-    rating: number;
-    author: IUser;
-  }
+export type CommentsType = {
+  comment: string;
+  date: string;
+  rating: number;
+  author: UserType;
+}
 
-export interface ILocation {
-    latitude: string;
-    longitude: string;
-  }
+export type LocationType = {
+  latitude: number;
+  longitude: number;
+}
 
-export interface IOffer {
-    title: string;
-    description: string;
-    postDate: Date;
-    city: string;
-    previewImage: string;
-    images: string[];
-    isPremium: boolean;
-    isFavorite: boolean;
-    rating: number;
-    hostType: string;
-    bedrooms: number;
-    quests: number;
-    price: number;
-    features: string[];
-    author: IUser;
-    comments: number;
-    location: ILocation;
-  }
+export type Location = {
+  latitude: number;
+  longitude: number;
+}
+
+export type City = {
+  name: string;
+  location: Location;
+}
+
+export enum OfferTypeEnum {
+  apartment = 'apartment',
+  house = 'house',
+  room = 'room',
+  hotel = 'hotel'
+}
+
+export enum FeaturesTypeEnum {
+  'Breakfast' = 'Breakfast',
+  'Air conditioning' = 'Air conditioning',
+  'Laptop friendly workspace' = 'Laptop friendly workspace',
+  'Baby seat' = 'Baby seat',
+  'Washer' = 'Washer',
+  'Towels' = 'Towels',
+  'Fridge' = 'Fridge',
+}
+
+
+export type OfferType = {
+  title: string;
+  description: string;
+  date: Date;
+  city: City;
+  previewImage: string;
+  images: string[];
+  isPremium: boolean;
+  isFavorite: boolean;
+  rating: number;
+  hostType: OfferTypeEnum;
+  bedrooms: number;
+  quests: number;
+  price: number;
+  features: FeaturesTypeEnum[];
+  author: UserType;
+  comments: number;
+  location: LocationType;
+};
+
+

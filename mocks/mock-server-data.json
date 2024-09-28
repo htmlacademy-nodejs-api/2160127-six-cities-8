@@ -1,0 +1,53 @@
+{
+  "api": {
+    "titles": ["Дом отдыха Nice", "Курорт Citygate Kamala", "Отель The International", "Отель Bed Nimman"],
+    "descriptions": [
+      "Он находится в 300 метрах от храма Ват Пхра Сингх и воскресной пешеходной улицы. Расстояние до международного аэропорта Чиангмая составляет 3 км.",
+      "Блюда тайской и западной кухни можно отведать в ресторане и баре, который открыт ежедневно с 06:00 до 22:00. Дополнительные местные рестораны находятся в 5 минутах ходьбы.",
+      "В распоряжении гостей бутик-отеля Chankam круглосуточная стойка регистрации, массажный кабинет и прачечная. Имеется бесплатная парковка.3",
+      "Номера с кондиционером в отеле Layalina оформлены в ярком деревянно-белом стиле. ",
+      "Пляж Патонг находится в 4 км от отеля, а поездка до аэропорта Пхукета занимает 45 минут."
+    ],
+    "previews": ["preview/1.jpg", "preview/2.jpg", "preview/3.jpg", "preview/4.jpg", "preview/5.jpg", "preview/6.jpg"],
+    "images": [
+      "foto/1.jpg",
+      "foto/2.jpg",
+      "foto/3.jpg",
+      "foto/4.jpg",
+      "foto/5.jpg",
+      "foto/6.jpg",
+      "foto/7.jpg",
+      "foto/8.jpg",
+      "foto/9.jpg"
+    ],
+    "features": ["Breakfast", "Air conditioning", "Laptop friendly workspace", "Baby seat", "Washer", "Towels", "Fridge"],
+    "users": ["Max Sheldon", "Jonh Brown", "Andy Sacks", "Brigite Laine", "Juliana Murr", "Tom Hanks", "Ruth Laslie", "Amanda Fox"],
+    "emails": [
+      "max@yahoo.com",
+      "john@google.com",
+      "andy@fb.com",
+      "brigite_laine@yandex.ru",
+      "JM.1234@yahoo.com",
+      "just_tom@yahoo.com",
+      "RL_now-cooking@yahoo.com",
+      "amanda-fox@yahoo.com"
+    ],
+    "avatars": ["avatar-tom.jpg", "avatar-john.jpg", "avatar-max.jpg", "avatar-male.jpg", "avatar-female.jpg", "avatar-amanda.jpg"],
+    "cities": ["Kuznechikha", "Kapuskasing", "Pandanwangi", "Repki", "Beopwon", "White Rock"],
+    "coordinates": [
+      "48.85661,2.351499",
+      "50.938361,6.959974",
+      "50.846557,4.351697",
+      "52.370216,4.895168",
+      "53.550341,10.000654",
+      "51.225402,6.776314"
+    ],
+    "passwords": [
+      "zT9\\McJ's0Y}Aj<",
+      "tX7{j~sBhB8|G",
+      "xS3&v\\0AK`Pm",
+      "aO3+l<Ue",
+      "dW0@Dh.fh"
+    ]
+  }
+}
