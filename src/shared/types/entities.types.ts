@@ -23,7 +23,7 @@ export type Location = {
   longitude: number;
 }
 
-export type City = {
+export type CityType = {
   name: string;
   location: Location;
 }
@@ -50,7 +50,7 @@ export type OfferType = {
   title: string;
   description: string;
   date: Date;
-  city: City;
+  city: CityType;
   previewImage: string;
   images: string[];
   isPremium: boolean;
