@@ -44,7 +44,7 @@ export class RestApplication {
       password: 'Unknown',
       isPro: true
     });
-
-    console.log(user);
+    const error = user.validateSync();
+    console.log(error);
   }
 }
