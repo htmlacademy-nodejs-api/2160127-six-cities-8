@@ -1,7 +1,10 @@
 import { Document, model, Schema } from 'mongoose';
 import { UserType } from '../../types/entities.types.js';
 
-export interface UserDocument extends UserType, Document {}
+export interface UserDocument extends UserType, Document {
+  createdAt: Date,
+  updatedAt: Date,
+}
 
 const userSchema = new Schema({
   name: String,
@@ -9,6 +12,6 @@ const userSchema = new Schema({
   avatarUrl: String,
   password: String,
   isPro: Boolean,
-});
+}, { timestamps: true });
 
 export const UserModel = model<UserDocument>('User', userSchema);
