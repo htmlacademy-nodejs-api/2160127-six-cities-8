@@ -8,7 +8,10 @@ export interface UserDocument extends UserType, Document {
 
 const userSchema = new Schema({
   name: String,
-  email: String,
+  email: {
+    type: String,
+    unique: true,
+  },
   avatarUrl: String,
   password: String,
   isPro: Boolean,
