@@ -11,7 +11,7 @@ export class PinoLogger implements ILogger {
 
   constructor() {
     const modulePath = getCurrentModuleDirectoryPath();
-    const logFilePath = '../logs/rest.log';
+    const logFilePath = './logs/rest.log';
     const destination = resolve(modulePath, '../../../', logFilePath);
 
     const multiTransport = transport({
