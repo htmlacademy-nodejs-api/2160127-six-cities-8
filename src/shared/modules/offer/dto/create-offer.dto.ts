@@ -1,7 +1,7 @@
-import { CityName } from '../../../types/index.js';
+import { CityName, OfferTypeEnum } from '../../../types/index.js';
 import { Features } from '../../../types/index.js';
 import { Location } from '../../../types/index.js';
-import { OfferType } from '../../../types/index.js';
+
 
 export class CreateOfferDto {
   public title: string;
@@ -13,11 +13,11 @@ export class CreateOfferDto {
   public isPremium: boolean;
   public isFavorite: boolean;
   public rating: number;
-  public type: OfferType;
+  public OfferTypeEnum: OfferTypeEnum;
   public bedrooms: number;
-  public maxAdults: number;
+  public quests: number;
   public price: number;
-  public goods: Features[];
+  public features: Features[];
   public userId: string;
   public location: Location;
 }

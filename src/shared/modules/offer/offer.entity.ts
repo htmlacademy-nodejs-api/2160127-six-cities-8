@@ -51,19 +51,19 @@ export class IOfferEntity extends defaultClasses.TimeStamps {
   public rating: number;
 
   @prop({ required: true, type: () => String, enum: OfferTypeEnum })
-  public type: OfferTypeEnum;
+  public OfferTypeEnum: OfferTypeEnum;
 
   @prop({ required: true })
   public bedrooms: number;
 
-  @prop({ required: true })
-  public maxAdults: number;
+  @prop({ required: false })
+  public quests: number;
 
   @prop({ required: true })
   public price: number;
 
   @prop({ required: true })
-  public goods: Features[];
+  public features: Features[];
 
   @prop({
     ref: UserEntity,
