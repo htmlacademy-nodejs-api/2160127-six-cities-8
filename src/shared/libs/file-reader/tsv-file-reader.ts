@@ -1,6 +1,6 @@
 // import {IFileReader} from './file-reader.interface.js';
 import { createReadStream } from 'node:fs';
-import {OfferType, LocationType, OfferTypeEnum, FeaturesTypeEnum} from '#shared/types/entities.types.js';
+import {OfferType, Location, OfferTypeEnum, Features, CityName} from '../../types/index.js';
 //import {readFileSync} from 'node:fs';
 import EventEmitter from 'node:events';
 // import chalk from 'chalk';
@@ -45,7 +45,7 @@ export class TVSFileReader extends EventEmitter {
       title,
       description,
       date: new Date(postDate),
-      city: { name: city, location: this.parseLocation(cityLocation)},
+      city: { name: CityName[city as CityName], location: this.parseLocation(cityLocation)},
       previewImage,
       images: images.split(';'),
       isPremium: this.parseBoolean(isPremium),
@@ -71,14 +71,14 @@ export class TVSFileReader extends EventEmitter {
   //   return {name, email, avatar, password, userType: userType === 'normal' ? 'normal' : 'pro'};
   // }
 
-  private parseLocation(location: string): LocationType {
+  private parseLocation(location: string): Location {
     const [latitude, longitude] = location.split(',').map((coord) => Number(coord));
     return {latitude, longitude};
   }
 
-  private parseFeatures(features: string): FeaturesTypeEnum[] {
+  private parseFeatures(features: string): Features[] {
     return features.split(',').map((name) => {
-      const featuresEnumValue = FeaturesTypeEnum[name.trim() as FeaturesTypeEnum];
+      const featuresEnumValue = Features[name.trim() as Features];
       if (featuresEnumValue) {
         return featuresEnumValue;
       } else {
@@ -106,7 +106,9 @@ export class TVSFileReader extends EventEmitter {
         importedRowCount++;
 
         const parsedOffer = this.parseLineToOffer(completeRow);
-        this.emit('line', parsedOffer);
+        await new Promise((resolve) => {
+          this.emit('line', parsedOffer, resolve);
+        });
       }
     }
     this.emit('end', importedRowCount);
