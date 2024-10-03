@@ -19,7 +19,7 @@ export class DefaultOfferService implements IOfferService {
 
   async create(dto: CreateOfferDto): Promise<OfferEntityDocument> {
     const result = await this.offerModel.create(dto);
-    this.logger.info(`New offer created: ${dto.title}`);
+    this.logger.info(`New offer created: ${dto.title} ${dto.description} ${dto.createdDate}`);
 
     return result;
   }

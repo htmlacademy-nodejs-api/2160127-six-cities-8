@@ -8,6 +8,7 @@ export class CreateOfferDto {
   public description: string;
   public createdDate: Date;
   public city: CityName;
+  public location: Location;
   public previewImage: string;
   public images: string[];
   public isPremium: boolean;
@@ -19,5 +20,4 @@ export class CreateOfferDto {
   public price: number;
   public features: Features[];
   public userId: string;
-  public location: Location;
 }
