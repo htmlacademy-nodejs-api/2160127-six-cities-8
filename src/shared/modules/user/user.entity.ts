@@ -1,6 +1,6 @@
 import { defaultClasses, getModelForClass, prop, modelOptions } from '@typegoose/typegoose';
 
-import { UserType } from '../../types/entities.types.js';
+import { User } from '../../types/index.js';
 import { createSHA256 } from '../../helpers/index.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
@@ -14,7 +14,7 @@ export interface UserEntity extends defaultClasses.Base {}
 })
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export class UserEntity extends defaultClasses.TimeStamps implements UserType {
+export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({ required: true, default: '' })
   public name: string;
 
@@ -31,7 +31,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements UserType {
   @prop({ required: false })
   public isPro: boolean;
 
-  constructor(userData: UserType) {
+  constructor(userData: User) {
     super();
 
     this.name = userData.name;

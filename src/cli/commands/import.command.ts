@@ -1,7 +1,7 @@
 import {ICommand} from './command.interface.js';
 import {TVSFileReader} from '../../shared/libs/file-reader/index.js';
 import chalk from 'chalk';
-import { OfferType } from '../../shared/types/entities.types.js';
+import { OfferType } from '../../shared/types/index.js';
 import { getErrorMessage } from '../../shared/helpers/common.js';
 
 export class ImportCommand implements ICommand {

@@ -1,6 +1,6 @@
 import {IOfferGenerator} from './offer-generator.interface.js';
 import {MockServerDataType} from '../../types/mock-server-data.type.js';
-import {OfferTypeEnum} from '../../types/entities.types.js';
+import {OfferTypeEnum} from '../../types/index.js';
 import {getRandomDate, getRandomItem, getRandomItems, getRandomBoolean, getRandomInRange} from '../../helpers/common.js';
 import {PriceLimit, RatingLimit, RoomLimit, QuestsLimit, CommentsLimit} from './const.js';
 
