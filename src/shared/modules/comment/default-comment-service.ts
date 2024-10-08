@@ -1,0 +1,30 @@
+import { ILogger } from '../../libs/logger/logger.interface.js';
+import { Component } from '../../types/component.enum.js';
+import { types } from '@typegoose/typegoose';
+import { inject, injectable } from 'inversify';
+import { CreateCommentDto } from './dto/create-comment-dto.js';
+import { CommentEntity } from './comment-entity.js';
+import {
+  CommentEntityDocument,
+  ICommentService,
+} from './comment-service.interface.js';
+
+@injectable()
+export class DefaultCommentService implements ICommentService {
+  constructor(
+    @inject(Component.Logger) private readonly logger: ILogger,
+    @inject(Component.CommentModel)
+    private readonly CommentModel: types.ModelType<CommentEntity>
+  ) {}
+
+  async create(dto: CreateCommentDto): Promise<CommentEntityDocument> {
+    const result = await this.CommentModel.create(dto);
+    this.logger.info('New Comment created');
+
+    return result;
+  }
+
+  findByOfferId(offerId: string): Promise<CommentEntityDocument | null> {
+    return this.CommentModel.findById(offerId).populate(['userId']).exec();
+  }
+}
