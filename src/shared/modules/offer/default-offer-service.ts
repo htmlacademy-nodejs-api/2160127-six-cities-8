@@ -25,6 +25,9 @@ export class DefaultOfferService implements IOfferService {
   }
 
   findById(offerId: string): Promise<OfferEntityDocument | null> {
-    return this.offerModel.findById(offerId).exec();
+    return this.offerModel
+      .findById(offerId)
+      .populate(['userId'])
+      .exec();
   }
 }
