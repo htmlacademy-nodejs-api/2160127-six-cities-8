@@ -5,8 +5,10 @@ import { DefaultCommentService } from './default-comment-service.js';
 import { CommentEntity, CommentModel } from './comment-entity.js';
 import { ICommentService } from './comment-service.interface.js';
 
+
 export function createCommentContainer() {
   const CommentContainer = new Container();
+
   CommentContainer
     .bind<ICommentService>(Component.CommentService)
     .to(DefaultCommentService)

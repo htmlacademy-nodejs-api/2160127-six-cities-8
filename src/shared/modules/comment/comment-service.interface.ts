@@ -7,4 +7,5 @@ export type CommentEntityDocument = DocumentType<CommentEntity>;
 export interface ICommentService {
   create(dto: CreateCommentDto): Promise<CommentEntityDocument>;
   findByOfferId(offerId: string): Promise<CommentEntityDocument | null>;
+  deleteByOfferId(offerId: string): Promise<number | null>;
 }

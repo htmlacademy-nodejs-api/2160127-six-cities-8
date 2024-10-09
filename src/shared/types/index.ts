@@ -9,4 +9,5 @@ export { OfferTypeEnum } from './offer-type.enum.js';
 export { OfferType } from './offer.type.js';
 export { RangeType } from './range.types.js';
 export { User } from './user.type.js';
+export { SortType } from './sort-type.enum.js';
 

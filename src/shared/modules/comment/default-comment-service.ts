@@ -1,6 +1,6 @@
 import { ILogger } from '../../libs/logger/logger.interface.js';
 import { Component } from '../../types/component.enum.js';
-import { types } from '@typegoose/typegoose';
+import { types, DocumentType } from '@typegoose/typegoose';
 import { inject, injectable } from 'inversify';
 import { CreateCommentDto } from './dto/create-comment-dto.js';
 import { CommentEntity } from './comment-entity.js';
@@ -17,14 +17,23 @@ export class DefaultCommentService implements ICommentService {
     private readonly CommentModel: types.ModelType<CommentEntity>
   ) {}
 
-  async create(dto: CreateCommentDto): Promise<CommentEntityDocument> {
+  public async create(dto: CreateCommentDto): Promise<CommentEntityDocument> {
     const result = await this.CommentModel.create(dto);
     this.logger.info('New Comment created');
-
     return result;
   }
 
-  findByOfferId(offerId: string): Promise<CommentEntityDocument | null> {
+  public async findByOfferId(offerId: string): Promise<CommentEntityDocument | null> {
     return this.CommentModel.findById(offerId).populate(['userId']).exec();
+  }
+
+  public async find(): Promise<DocumentType<CommentEntity>[]> {
+    return this.CommentModel.find();
+  }
+
+  public async deleteByOfferId(offerId: string): Promise<number> {
+    const result = await this.CommentModel.deleteMany({offerId}).exec();
+    this.logger.info(`Comment by offerId= ${offerId} deleted`);
+    return result.deletedCount;
   }
 }
