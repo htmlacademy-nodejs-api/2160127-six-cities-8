@@ -34,6 +34,9 @@ export class RestApplication {
   private async _initServer() {
     const port = this.config.get('PORT');
     this.server.listen(port);
+    this.server.get('/', (_req, res) => {
+      res.send('Hello');
+    });
   }
 
   public async init() {
