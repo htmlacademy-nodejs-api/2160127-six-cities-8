@@ -1,3 +1,4 @@
+
 export const Component = {
   RestApplication: Symbol.for('RestApplication'),
   Logger: Symbol.for('Logger'),
@@ -10,4 +11,6 @@ export const Component = {
   CommentService: Symbol.for('CommentService'),
   CommentModel: Symbol.for('CommentModel'),
   OfferController: Symbol.for('OfferController'),
+  UserController: Symbol.for('UserController'),
+  CommentController: Symbol.for('CommentController'),
 } as const;

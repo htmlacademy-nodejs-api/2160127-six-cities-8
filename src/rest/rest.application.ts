@@ -6,7 +6,7 @@ import { IConfig, RestSchema } from '../shared/libs/config/index.js';
 import { Component } from '../shared/types/component.enum.js';
 import { IDatabaseClient } from '../shared/libs/database-client/index.js';
 import { getMongoURI } from '../shared/helpers/index.js';
-import { UserModel } from '../shared/modules/user/index.js';
+// import { UserModel } from '../shared/modules/user/index.js';
 import { IController } from '../shared/libs/rest/index.js';
 
 @injectable()
@@ -17,6 +17,8 @@ export class RestApplication {
     @inject(Component.Config) private readonly config: IConfig<RestSchema>,
     @inject(Component.DatabaseClient) private readonly databaseClient: IDatabaseClient,
     @inject(Component.OfferController) private readonly offerController: IController,
+    @inject(Component.UserController) private readonly userController: IController,
+    @inject(Component.CommentController) private readonly commentController: IController,
   ) {
     this.server = express();
   }
@@ -43,6 +45,8 @@ export class RestApplication {
 
   private async _initControllers() {
     this.server.use('/offers', this.offerController.router);
+    this.server.use('/users', this.userController.router);
+    this.server.use('/comments', this.commentController.router);
   }
 
   public async init() {
@@ -64,14 +68,14 @@ export class RestApplication {
       `🚀 Server started on http://localhost:${this.config.get('PORT')}`
     );
 
-    const user = await UserModel.create({
-      name: 'Keks',
-      email: 'test2@email.local',
-      avatarUrl: 'keks.jpg',
-      password: 'Unknown',
-      isPro: true
-    });
-    const error = user.validateSync();
-    console.log(error);
+    // const user = await UserModel.create({
+    //   name: 'Keks',
+    //   email: 'test2@email.local',
+    //   avatarUrl: 'keks.jpg',
+    //   password: 'Unknown',
+    //   isPro: true
+    // });
+    // const error = user.validateSync();
+    // console.log(error);
   }
 }
