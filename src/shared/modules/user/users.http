@@ -16,3 +16,14 @@ Content-Type: application/json
   "isPro": true
 }
 ###
+# Авторизовать пользователя
+
+POST http://localhost:5000/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "email@mail2.ru",
+  "password": "string"
+}
+
+###
