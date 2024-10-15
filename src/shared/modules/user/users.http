@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
   "name": "TEstUser",
-  "email": "email@mail1.ru",
+  "email": "email@mail2.ru",
   "avatar": "1.img",
   "password": "string",
   "isPro": true
