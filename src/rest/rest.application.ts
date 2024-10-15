@@ -7,7 +7,7 @@ import { Component } from '../shared/types/component.enum.js';
 import { IDatabaseClient } from '../shared/libs/database-client/index.js';
 import { getMongoURI } from '../shared/helpers/index.js';
 // import { UserModel } from '../shared/modules/user/index.js';
-import { IController } from '../shared/libs/rest/index.js';
+import { IController, ExceptionFilter } from '../shared/libs/rest/index.js';
 
 @injectable()
 export class RestApplication {
@@ -19,8 +19,13 @@ export class RestApplication {
     @inject(Component.OfferController) private readonly offerController: IController,
     @inject(Component.UserController) private readonly userController: IController,
     @inject(Component.CommentController) private readonly commentController: IController,
+    @inject(Component.ExceptionFilter) private readonly appExceptionFilter: ExceptionFilter,
   ) {
     this.server = express();
+  }
+
+  private async _initExceptionFilters() {
+    this.server.use(this.appExceptionFilter.catch.bind(this.appExceptionFilter));
   }
 
   private async initDb() {
@@ -68,6 +73,11 @@ export class RestApplication {
     this.logger.info('Init controllers');
     await this._initControllers();
     this.logger.info('Controller initialization completed');
+
+    this.logger.info('Init exception filters');
+    await this._initExceptionFilters();
+    this.logger.info('Exception filters initialization compleated');
+
 
     this.logger.info('Try to init server…');
     await this._initServer();
