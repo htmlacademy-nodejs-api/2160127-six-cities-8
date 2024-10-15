@@ -1,12 +1,13 @@
 import { inject, injectable } from 'inversify';
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 import { BaseController, HttpMethod } from '../../libs/rest/index.js';
 import { ILogger } from '../../libs/logger/index.js';
 import { Component } from '../../types/index.js';
 import { IUserService } from './user-service.interface.js';
 import { fillDTO } from '../../helpers/index.js';
-import { UserRdo } from './index.js';
+import { UserRdo, CreateUserDto } from './index.js';
 
 @injectable()
 export class UserController extends BaseController {
@@ -29,7 +30,24 @@ export class UserController extends BaseController {
     this.ok(res, responseData);
   }
 
-  public create(_req: Request, _res: Response): void {
-    // Код обработчика
+  public async create(
+    { body }: Request<Record<string, unknown>, Record<string, unknown>, CreateUserDto>,
+    res: Response
+  ): Promise<void> {
+
+    const existUser = await this.userService.findByEmail(body.email);
+
+    if (existUser) {
+      const existUserError = new Error(`User with email «${body.email}» exists.`);
+      this.send(res,
+        StatusCodes.UNPROCESSABLE_ENTITY,
+        { error: existUserError.message }
+      );
+
+      return this.logger.error(existUserError.message, existUserError);
+    }
+
+    const result = await this.userService.create(body, 'secret');
+    this.created(res, fillDTO(UserRdo, result));
   }
 }
