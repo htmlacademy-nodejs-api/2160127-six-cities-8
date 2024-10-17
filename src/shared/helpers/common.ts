@@ -1,3 +1,5 @@
+import { ClassConstructor, plainToInstance } from 'class-transformer';
+
 import {RangeType} from '../types/range.types.js';
 
 export function generateRandomValue(min: number, max: number, numAfterDigit = 0) {
@@ -18,6 +20,10 @@ export function getRandomItems<T>(items: T[]): T[] {
   return items.slice(startPosition, endPosition);
 }
 
+export function fillDTO<T, V>(someDto: ClassConstructor<T>, plainObject: V) {
+  return plainToInstance(someDto, plainObject, { excludeExtraneousValues: true });
+}
+
 export function getRandomItem<T>(items: T[]): T {
   return items[generateRandomValue(0, items.length - 1)];
 }
@@ -31,4 +37,10 @@ export function getRandomDate(): Date {
 
 export function getErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : '';
+}
+
+export function createErrorObject(message: string) {
+  return {
+    error: message,
+  };
 }

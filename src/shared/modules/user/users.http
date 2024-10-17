@@ -1,0 +1,29 @@
+# Пользователи
+## Получить список пользователей
+GET http://localhost:5000/users HTTP/1.1
+Content-Type: application/json
+
+###
+## Создать пользователя
+POST http://localhost:5000/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "TEstUser",
+  "email": "email@mail2.ru",
+  "avatar": "1.img",
+  "password": "string",
+  "isPro": true
+}
+###
+# Авторизовать пользователя
+
+POST http://localhost:5000/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "email@mail2.ru",
+  "password": "string"
+}
+
+###

@@ -7,6 +7,7 @@ import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateUserDto } from './dto/update-user.dto.js';
 import { Component } from '../../types/component.enum.js';
 import { ILogger } from '../../libs/logger/index.js';
+import { DEFAULT_USER_COUNT } from './user.constant.js';
 
 @injectable()
 export class DefaultUserService implements IUserService {
@@ -23,6 +24,12 @@ export class DefaultUserService implements IUserService {
     this.logger.info(`New user created: ${user.email}`);
 
     return result;
+  }
+
+  public async find(count: number = DEFAULT_USER_COUNT, offset: number = 0): Promise<DocumentType<UserEntity>[]> {
+    return this.userModel
+      .find({}, {}, { limit: count, skip: offset })
+      .exec();
   }
 
   public async findByEmail(email: string): Promise<DocumentType<UserEntity> | null> {
