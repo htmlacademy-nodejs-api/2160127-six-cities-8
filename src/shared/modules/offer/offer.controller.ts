@@ -9,7 +9,7 @@ import { IOfferService } from './offer-service.interface.js';
 import { ParamOfferId } from './type/param-offerid.type.js';
 import { fillDTO } from '../../helpers/index.js';
 import { OfferRdo } from './index.js';
-import { CreateOfferDto } from './dto/create-offer.dto.js';
+import { CreateOfferRequest } from './type/create-offer-request.type.js';
 
 
 @injectable()
@@ -30,8 +30,7 @@ export class OfferController extends BaseController {
   public async index(_req: Request, res: Response): Promise<void> {
     const offers = await this.offerService.find();
     //this.ok(res, offers);
-    const responseData = fillDTO(OfferRdo, offers);
-    this.ok(res, responseData);
+    this.ok(res, fillDTO(OfferRdo, offers));
   }
 
   public async show({ params }: Request<ParamOfferId>, res: Response): Promise<void> {
@@ -49,12 +48,10 @@ export class OfferController extends BaseController {
     this.ok(res,fillDTO(OfferRdo, offer));
   }
 
-  public async create(
-    { body }: Request<Record<string, unknown>, Record<string, unknown>, CreateOfferDto>,
-    res: Response
-  ): Promise<void> {
+  public async create({ body }: CreateOfferRequest, res: Response): Promise<void> {
     const result = await this.offerService.create(body);
-    this.created(res, fillDTO(OfferRdo, result));
+    const offer = await this.offerService.findById(result.id);
+    this.created(res, fillDTO(OfferRdo, offer));
     this.logger.info(`Create offer ${result.id}`);
   }
 }
