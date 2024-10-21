@@ -29,3 +29,8 @@ Content-Type: application/json
   "userId": "66fe928984d10f086922abba"
 
 }
+###
+# Получить объявление по идентификатору
+GET http://localhost:5000/offers/66fe928984d10f086922abbc HTTP/1.1
+
+###
