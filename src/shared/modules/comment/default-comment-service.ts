@@ -8,6 +8,7 @@ import {
   CommentEntityDocument,
   ICommentService,
 } from './comment-service.interface.js';
+//import { IOfferEntity } from '../offer/index.js';
 import { DEFAULT_COMMENT_COUNT } from './index.js';
 
 @injectable()
@@ -35,6 +36,18 @@ export class DefaultCommentService implements ICommentService {
       .exec();
   }
 
+  public async findById(id: string): Promise<CommentEntity | null> {
+    return this.CommentModel
+      .findById(id)
+      .populate(['userId', 'offerId'])
+      .exec();
+  }
+
+  public async findCountByOfferId(offerId: string): Promise<number> {
+    return this.CommentModel
+      .countDocuments({offerId:offerId})
+      .exec();
+  }
 
   public async deleteByOfferId(offerId: string): Promise<number> {
     const result = await this.CommentModel.deleteMany({offerId}).exec();
