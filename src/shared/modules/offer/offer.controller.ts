@@ -46,7 +46,7 @@ export class OfferController extends BaseController {
       );
     }
 
-    this.ok(res, offer);
+    this.ok(res,fillDTO(OfferRdo, offer));
   }
 
   public async create(
