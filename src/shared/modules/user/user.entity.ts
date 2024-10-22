@@ -15,7 +15,7 @@ export interface UserEntity extends defaultClasses.Base {}
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class UserEntity extends defaultClasses.TimeStamps implements User {
-  @prop({ required: true, default: '', max: 15, min: 1 })
+  @prop({ required: true, default: '', maxlength: 15, minlength: 1 })
   public name: string;
 
   @prop({ unique: true, required: true, validate: {
@@ -30,7 +30,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
     }, message: 'Invalid avatar pictire format', }, })
   public avatar: string;
 
-  @prop({ required: true, max: 12, min: 6 })
+  @prop({ required: true, maxlength: 12, minlength: 6 })
   public password?: string;
 
 

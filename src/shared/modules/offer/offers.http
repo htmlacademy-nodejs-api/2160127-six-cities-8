@@ -50,5 +50,9 @@ Content-Type: application/json
   "description": "updated test offer",
   "price": 11111
 }
+###
+
+## Список комментариев к объявлению
+GET http://localhost:5000/offers/66fe928984d10f086922abbc/comments HTTP/1.1
 
 ###
