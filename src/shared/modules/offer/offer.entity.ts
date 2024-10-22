@@ -23,13 +23,13 @@ export interface IOfferEntity extends defaultClasses.Base {}
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class IOfferEntity extends defaultClasses.TimeStamps {
-  @prop({ trim: true, required: true })
+  @prop({ trim: true, required: true, minlength: 10, maxlength: 100 })
   public title: string;
 
-  @prop({ trim: true, required: true })
+  @prop({ trim: true, required: true, minlength: 20, maxlength: 1024 })
   public description: string;
 
-  @prop({ required: true })
+  @prop({ required: true, default: new Date() })
   public createdDate: Date;
 
   @prop({ required: true })
@@ -47,19 +47,19 @@ export class IOfferEntity extends defaultClasses.TimeStamps {
   @prop({ required: true })
   public isFavorite: boolean;
 
-  @prop({ required: true })
+  @prop({ required: true, max: 5, min: 1 })
   public rating: number;
 
   @prop({ required: true, type: () => String, enum: OfferTypeEnum })
   public OfferTypeEnum: OfferTypeEnum;
 
-  @prop({ required: true })
+  @prop({ required: true, max: 8, min: 1 })
   public bedrooms: number;
 
-  @prop({ required: false })
+  @prop({ required: false, max: 10, min: 1 })
   public quests: number;
 
-  @prop({ required: true })
+  @prop({ required: true, max: 100000, min: 100 })
   public price: number;
 
   @prop({ required: true })
