@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { Request, Response } from 'express';
 
 
-import { BaseController, HttpError, HttpMethod } from '../../libs/rest/index.js';
+import { BaseController, HttpError, HttpMethod, ValidateObjectIdMiddleware } from '../../libs/rest/index.js';
 import { ILogger } from '../../libs/logger/index.js';
 import { Component } from '../../types/index.js';
 import { ICommentService } from './comment-service.interface.js';
@@ -27,7 +27,10 @@ export class CommentController extends BaseController {
 
     this.addRoute({ path: '/', method: HttpMethod.Get, handler: this.index });
     this.addRoute({ path: '/', method: HttpMethod.Post, handler: this.create });
-    this.addRoute({ path: '/count/:offerId', method: HttpMethod.Get, handler: this.countByOfferId });
+    this.addRoute({ path: '/count/:offerId',
+      method: HttpMethod.Get,
+      handler: this.countByOfferId,
+      middlewares: [new ValidateObjectIdMiddleware('offerId')] });
     this.addRoute({ path: '/list/:offerId', method: HttpMethod.Get, handler: this.findByOfferId });
   }
 
