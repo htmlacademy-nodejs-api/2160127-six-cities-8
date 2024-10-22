@@ -25,8 +25,8 @@ export class DefaultCommentService implements ICommentService {
     return result;
   }
 
-  public async findByOfferId(offerId: string): Promise<CommentEntityDocument | null> {
-    return this.CommentModel.findById(offerId).populate(['userId']).exec();
+  public async findByOfferId(offerId: string): Promise<DocumentType<CommentEntityDocument>[]> {
+    return this.CommentModel.find({ offerId});
   }
 
   public async find(count: number = DEFAULT_COMMENT_COUNT, offset: number = 0): Promise<DocumentType<CommentEntity>[]> {

@@ -5,8 +5,14 @@ Content-Type: application/json
 
 ###
 # Количество по id пользователя
-## Получить список комментарией
+## Получить количество комментариев
 GET http://localhost:5000/comments/count/66fe928984d10f086922abbc HTTP/1.1
+Content-Type: application/json
+
+###
+# Список по id пользователя
+## Получить список комментариев
+GET http://localhost:5000/comments/list/66fe928984d10f086922abbc HTTP/1.1
 Content-Type: application/json
 
 ###

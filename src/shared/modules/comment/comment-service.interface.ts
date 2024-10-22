@@ -8,7 +8,7 @@ export interface ICommentService {
   create(dto: CreateCommentDto): Promise<CommentEntityDocument>;
   find(): Promise<DocumentType<CommentEntity>[]>;
   findById(id: string): Promise<CommentEntity | null>;
-  findByOfferId(offerId: string): Promise<CommentEntityDocument | null>;
+  findByOfferId(offerId: string): Promise<DocumentType<CommentEntityDocument>[]>;
   deleteByOfferId(offerId: string): Promise<number | null>;
   findCountByOfferId(offerId: string): Promise<number | null>;
 }
