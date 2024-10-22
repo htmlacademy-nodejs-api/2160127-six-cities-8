@@ -24,7 +24,6 @@ Content-Type: application/json
   "comment": "test comment",
   "rating": 2,
   "offerId": "66fe928984d10f086922abbc",
-  "userId": "66fe928984d10f086922abba",
-  "date": "2023-02-16T20:21:16.614Z"
+  "userId": "66fe928984d10f086922abba"
 }
 ###
