@@ -16,16 +16,16 @@ Content-Type: application/json
   "createdDate": "2027-08-14T04:02:02.487Z",
   "city": "Cologne",
   "location": "52.370216,4.895168",
-  "previewImage": "preview/2.jpg",
-  "images": "foto/2.jpg,foto/3.jpg,foto/4.jpg,foto/5.jpg,foto/6.jpg,foto/7.jpg",
+  "previewImage": "preview/2.jpgs",
+  "images": ["foto/2.jpg","foto/3.jpg","foto/4.jpg","foto/5.jpg","foto/6.jpg","foto/7.jpg"],
   "isPremium": false,
   "isFavorite": false,
   "rating": 3,
   "OfferTypeEnum": "apartment",
   "bedrooms": 1,
   "quests": 3,
-  "price": 11000,
-  "features": "Laptop friendly workspace,Baby seat,Washer,Towels,Fridge",
+  "price": 11,
+  "features": ["Laptop friendly workspace","Baby seat","Washer","Towels","Fridge"],
   "userId": "66fe928984d10f086922abba"
 
 }
@@ -48,7 +48,7 @@ Content-Type: application/json
 {
   "title": "updated offer",
   "description": "updated test offer",
-  "price": 11111
+  "price": 11
 }
 ###
 

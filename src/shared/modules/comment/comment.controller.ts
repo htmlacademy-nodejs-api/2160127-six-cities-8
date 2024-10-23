@@ -1,8 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { Request, Response } from 'express';
 
-
-import { BaseController, HttpError, HttpMethod, ValidateObjectIdMiddleware } from '../../libs/rest/index.js';
+import { BaseController, HttpError, HttpMethod, ValidateObjectIdMiddleware, ValidateDtoMiddleware } from '../../libs/rest/index.js';
 import { ILogger } from '../../libs/logger/index.js';
 import { Component } from '../../types/index.js';
 import { ICommentService } from './comment-service.interface.js';
@@ -12,7 +11,6 @@ import { RequestBody, RequestParams } from '../../libs/rest/index.js';
 import { ParamOfferId } from '../offer/type/param-offerid.type.js';
 import { IOfferService } from '../offer/offer-service.interface.js';
 import { StatusCodes } from 'http-status-codes';
-
 
 @injectable()
 export class CommentController extends BaseController {
@@ -26,7 +24,11 @@ export class CommentController extends BaseController {
     this.logger.info('Register routes for CommentController...');
 
     this.addRoute({ path: '/', method: HttpMethod.Get, handler: this.index });
-    this.addRoute({ path: '/', method: HttpMethod.Post, handler: this.create });
+    this.addRoute({
+      path: '/',
+      method: HttpMethod.Post,
+      handler: this.create,
+      middlewares: [new ValidateDtoMiddleware(CreateCommentDto)] });
     this.addRoute({ path: '/count/:offerId',
       method: HttpMethod.Get,
       handler: this.countByOfferId,

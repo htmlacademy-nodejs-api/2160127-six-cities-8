@@ -1,4 +1,4 @@
-import { IsArray, IsDateString, IsEnum, IsInt, IsMongoId, Max, MaxLength, Min, MinLength, IsObject, IsBoolean } from 'class-validator';
+import { IsArray, IsDateString, IsEnum, IsInt, IsMongoId, Max, MaxLength, Min, MinLength, IsBoolean } from 'class-validator';
 
 import { CityName, OfferTypeEnum } from '../../../types/index.js';
 import { Features } from '../../../types/index.js';
@@ -21,7 +21,6 @@ export class CreateOfferDto {
   @IsEnum(CityName, { message: CreateOfferValidationMessage.city.invalid })
   public city: CityName;
 
-  @IsObject({ message: CreateOfferValidationMessage.location.invalid })
   public location: Location;
 
   public previewImage: string;
