@@ -45,4 +45,8 @@ export class DefaultUserService implements IUserService {
     return this.create(dto, salt);
   }
 
+  public async exists(documentId: string): Promise<boolean> {
+    return (await this.userModel
+      .exists({_id: documentId})) !== null;
+  }
 }

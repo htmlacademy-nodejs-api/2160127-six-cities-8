@@ -27,3 +27,22 @@ Content-Type: application/json
 }
 
 ###
+## Get avatar image in upload dir
+GET http://localhost:5000/upload/avatar3.png HTTP/1.1
+
+
+###
+
+## Отправить изображение
+
+POST http://localhost:5000/users/66fc1dabd02a728f8aba063d/avatar HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="avatar"; filename="screen.png"
+Content-Type: image/png
+
+< D:\Learn\HtmlAcademy\2160127-six-cities-8\upload\avatar.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+##
