@@ -10,13 +10,19 @@ import {
   OfferEntityDocument,
   IOfferService,
 } from './offer-service.interface.js';
+import { UserEntity} from '../user/index.js';
+import { HttpError } from '../../libs/rest/index.js';
+import { StatusCodes } from 'http-status-codes';
+
 
 @injectable()
 export class DefaultOfferService implements IOfferService {
   constructor(
     @inject(Component.Logger) private readonly logger: ILogger,
     @inject(Component.OfferModel)
-    private readonly offerModel: types.ModelType<IOfferEntity>
+    private readonly offerModel: types.ModelType<IOfferEntity>,
+    @inject(Component.UserModel)
+    private readonly userModel: types.ModelType<UserEntity>
   ) {}
 
   async create(dto: CreateOfferDto): Promise<OfferEntityDocument> {
@@ -47,6 +53,14 @@ export class DefaultOfferService implements IOfferService {
   }
 
   public async updateById(offerId: string, dto: UpdateOfferDto): Promise<DocumentType<IOfferEntity> | null> {
+    if (dto.userId) {
+      const foundUser = await this.userModel.findById({ _id: { $in: dto.userId }});
+      if (!foundUser) {
+        throw new HttpError(StatusCodes.BAD_REQUEST, 'Some categories not exists', 'DefaultOfferService');
+      }
+
+    }
+
     return this.offerModel
       .findByIdAndUpdate(offerId, dto, {new: true})
       .populate(['userId'])

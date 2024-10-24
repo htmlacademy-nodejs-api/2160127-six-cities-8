@@ -4,7 +4,6 @@ import { inject, injectable } from 'inversify';
 import { IUserService } from './user-service.interface.js';
 import { UserEntity } from './user.entity.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
-import { UpdateUserDto } from './dto/update-user.dto.js';
 import { Component } from '../../types/component.enum.js';
 import { ILogger } from '../../libs/logger/index.js';
 import { DEFAULT_USER_COUNT } from './user.constant.js';
@@ -44,13 +43,6 @@ export class DefaultUserService implements IUserService {
     }
 
     return this.create(dto, salt);
-  }
-
-
-  public async updateById(userId: string, dto: UpdateUserDto): Promise<DocumentType<UserEntity> | null> {
-    return this.userModel
-      .findByIdAndUpdate(userId, dto, { new: true })
-      .exec();
   }
 
 }

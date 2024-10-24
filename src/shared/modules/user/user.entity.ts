@@ -15,16 +15,26 @@ export interface UserEntity extends defaultClasses.Base {}
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class UserEntity extends defaultClasses.TimeStamps implements User {
-  @prop({ required: true, default: '' })
+  @prop({ required: true })
   public name: string;
 
+  // Валидацию перенес на DTO, зде было так:
+  // @prop({ unique: true, required: true, validate: {
+  //   validator: function (value) {
+  //     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  //   }, message: 'Invalid email address format', }, })
   @prop({ unique: true, required: true })
   public email: string;
 
-  @prop({ required: false, default: '' })
+  // Валидацию перенес на DTO, зде было так:
+  // @prop({ required: false, validate: {
+  //   validator: function (value) {
+  //     return /^.*(.png|.jpg)$/.test(value);
+  //   }, message: 'Invalid avatar pictire format', }, })
+  @prop({ required: false })
   public avatar: string;
 
-  @prop({ required: true, default: '' })
+  @prop({ required: true })
   public password?: string;
 
 

@@ -7,3 +7,7 @@ export { AppExceptionFilter } from './exception-filter/app-exception-filter.js';
 export { RequestParams } from './types/request.params.type.js';
 export { RequestBody } from './types/request-body.type.js';
 export { HttpError } from './errors/http-error.js';
+export { IMiddleware } from './middleware/middleware.interface.js';
+export { ValidateObjectIdMiddleware } from './middleware/validate-objectid.middleware.js';
+export { ValidateDtoMiddleware } from './middleware/validate-dto.middleware.js';
+export { DocumentExistsMiddleware } from './middleware/document-exists.middleware.js';

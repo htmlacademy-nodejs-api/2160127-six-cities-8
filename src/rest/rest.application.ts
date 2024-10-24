@@ -85,6 +85,7 @@ export class RestApplication {
       `🚀 Server started on http://localhost:${this.config.get('PORT')}`
     );
 
+    //test user down:
     // const user = await UserModel.create({
     //   name: 'Keks',
     //   email: 'test2@email.local',

@@ -16,16 +16,43 @@ Content-Type: application/json
   "createdDate": "2027-08-14T04:02:02.487Z",
   "city": "Cologne",
   "location": "52.370216,4.895168",
-  "previewImage": "preview/2.jpg",
-  "images": "foto/2.jpg,foto/3.jpg,foto/4.jpg,foto/5.jpg,foto/6.jpg,foto/7.jpg",
+  "previewImage": "preview/2.jpgs",
+  "images": ["foto/2.jpg","foto/3.jpg","foto/4.jpg","foto/5.jpg","foto/6.jpg","foto/7.jpg"],
   "isPremium": false,
   "isFavorite": false,
   "rating": 3,
   "OfferTypeEnum": "apartment",
   "bedrooms": 1,
   "quests": 3,
-  "price": 11000,
-  "features": "Laptop friendly workspace,Baby seat,Washer,Towels,Fridge",
+  "price": 11,
+  "features": ["Laptop friendly workspace","Baby seat","Washer","Towels","Fridge"],
   "userId": "66fe928984d10f086922abba"
 
 }
+###
+# Получить объявление по идентификатору
+GET http://localhost:5000/offers/67168132a3b51227a52ddd93 HTTP/1.1
+
+###
+
+## Удалить объявление по идентификатору
+
+DELETE http://localhost:5000/offers/66fe928d84d10f086922abcd HTTP/1.1
+
+###
+## Обновить объявление
+
+PATCH http://localhost:5000/offers/67168132a3b51227a52ddd93 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "updated offer",
+  "description": "updated test offer",
+  "price": 11
+}
+###
+
+## Список комментариев к объявлению
+GET http://localhost:5000/offers/66fe928984d10f086922abbc/comments HTTP/1.1
+
+###
