@@ -36,6 +36,20 @@ export class OfferController extends BaseController {
 
     this.addRoute({ path: '/', method: HttpMethod.Get, handler: this.index });
     this.addRoute({
+      path: '/favorite',
+      method: HttpMethod.Get,
+      handler: this.getFavorite,
+      middlewares: [
+        new PrivateRouteMiddleware()]
+    });
+    this.addRoute({
+      path: '/premiun',
+      method: HttpMethod.Get,
+      handler: this.getPremium,
+      middlewares: [
+        new PrivateRouteMiddleware()]
+    });
+    this.addRoute({
       path: '/',
       method: HttpMethod.Post,
       handler: this.create,
@@ -74,6 +88,18 @@ export class OfferController extends BaseController {
 
   public async index(_req: Request, res: Response): Promise<void> {
     const offers = await this.offerService.find();
+    //this.ok(res, offers);
+    this.ok(res, fillDTO(OfferRdo, offers));
+  }
+
+  public async getFavorite(_req: Request, res: Response): Promise<void> {
+    const offers = await this.offerService.findFavorite();
+    //this.ok(res, offers);
+    this.ok(res, fillDTO(OfferRdo, offers));
+  }
+
+  public async getPremium(_req: Request, res: Response): Promise<void> {
+    const offers = await this.offerService.findPremium();
     //this.ok(res, offers);
     this.ok(res, fillDTO(OfferRdo, offers));
   }
