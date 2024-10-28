@@ -1,4 +1,4 @@
-import { IsArray, IsDateString, IsEnum, IsInt, IsMongoId, Max, MaxLength, Min, MinLength, IsBoolean } from 'class-validator';
+import { IsArray, IsDateString, IsEnum, IsInt, Max, MaxLength, Min, MinLength, IsBoolean } from 'class-validator';
 
 import { CityName, OfferTypeEnum } from '../../../types/index.js';
 import { Features } from '../../../types/index.js';
@@ -60,6 +60,5 @@ export class CreateOfferDto {
   @IsArray({message: CreateOfferValidationMessage.features.invalidFormat})
   public features: Features[];
 
-  @IsMongoId({ message: CreateOfferValidationMessage.userId.invalidId })
   public userId: string;
 }

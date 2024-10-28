@@ -96,4 +96,18 @@ export class DefaultOfferService implements IOfferService {
       .populate(['userId'])
       .exec();
   }
+
+  public async findFavorite(count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
+    return this.offerModel
+      .find({isFavorite: true}, {}, { limit: count, skip: offset })
+      .populate(['userId'])
+      .exec();
+  }
+
+  public async findPremium(count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
+    return this.offerModel
+      .find({isPremium: true}, {}, { limit: count, skip: offset })
+      .populate(['userId'])
+      .exec();
+  }
 }
