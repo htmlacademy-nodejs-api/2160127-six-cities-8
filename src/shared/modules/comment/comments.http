@@ -23,7 +23,17 @@ Content-Type: application/json
 {
   "comment": "test comment",
   "rating": 5,
-  "offerId": "66fe928984d10f086922abbc",
-  "userId": "66fe928984d10f086922abba"
+  "offerId": "66fe928984d10f086922abbc"
+}
+###
+# Создание комментария авторизированным пользователем
+POST  http://localhost:5000/comments/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQG1haWwyLnJ1IiwibmFtZSI6IlRFc3RVc2VyIiwiaXNQcm8iOnRydWUsImF2YXRhciI6IjEuaW1nIiwiaWQiOiI2NzBlOWNjY2NmYzgwMmViMzY3ZjgwODYiLCJpYXQiOjE3MzAxMjg0MDEsImV4cCI6MTczMDMwMTIwMX0.RvP1vZMY0vR3mskrqkn1SGoeFKOTMr-ZcshL56uOm1k
+
+{
+  "comment": "test comment",
+  "rating": 5,
+  "offerId": "66fe928984d10f086922abbc"
 }
 ###
