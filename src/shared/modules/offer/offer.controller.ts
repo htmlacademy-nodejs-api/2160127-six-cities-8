@@ -7,6 +7,7 @@ import {
   HttpError,
   HttpMethod,
   ValidateObjectIdMiddleware,
+  PrivateRouteMiddleware,
   ValidateDtoMiddleware,
   DocumentExistsMiddleware } from '../../libs/rest/index.js';
 import { ILogger } from '../../libs/logger/index.js';
@@ -38,7 +39,9 @@ export class OfferController extends BaseController {
       path: '/',
       method: HttpMethod.Post,
       handler: this.create,
-      middlewares: [new ValidateDtoMiddleware(CreateOfferDto)]
+      middlewares: [
+        new PrivateRouteMiddleware(),
+        new ValidateDtoMiddleware(CreateOfferDto)]
     });
     this.addRoute({ path: '/:offerId',
       method: HttpMethod.Get,
@@ -50,12 +53,14 @@ export class OfferController extends BaseController {
       method: HttpMethod.Delete,
       handler: this.delete,
       middlewares: [
+        new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
         new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId')] });
     this.addRoute({ path: '/:offerId',
       method: HttpMethod.Patch,
       handler: this.update,
       middlewares: [
+        new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
         new ValidateDtoMiddleware(UpdateOfferDto),
         new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId')] });
