@@ -54,7 +54,7 @@ export class CommentController extends BaseController {
 
   }
 
-  public async create({ body }: Request<RequestParams, RequestBody, CreateCommentDto >, res: Response): Promise<void> {
+  public async create({ body, tokenPayload }: Request<RequestParams, RequestBody, CreateCommentDto >, res: Response): Promise<void> {
     const offer = await this.offerService.findById(body.offerId);
     if(!offer){
       throw new HttpError(
@@ -63,7 +63,7 @@ export class CommentController extends BaseController {
         'CommentController'
       );
     }
-    const result = await this.commentService.create(body);
+    const result = await this.commentService.create({ ...body, userId: tokenPayload.id });
     const comment = await this.commentService.findById(result.id);
     this.created(res, fillDTO(CreateCommentDto, comment));
     this.logger.info(`Create offer ${result.id}`);
