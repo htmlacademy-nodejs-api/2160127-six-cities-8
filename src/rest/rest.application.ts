@@ -5,7 +5,7 @@ import { ILogger } from '../shared/libs/logger/index.js';
 import { IConfig, RestSchema } from '../shared/libs/config/index.js';
 import { Component } from '../shared/types/component.enum.js';
 import { IDatabaseClient } from '../shared/libs/database-client/index.js';
-import { getMongoURI } from '../shared/helpers/index.js';
+import { getFullServerPath, getMongoURI } from '../shared/helpers/index.js';
 // import { UserModel } from '../shared/modules/user/index.js';
 import { IController, ExceptionFilter, ParseTokenMiddleware } from '../shared/libs/rest/index.js';
 
@@ -94,9 +94,7 @@ export class RestApplication {
 
     this.logger.info('Try to init server…');
     await this._initServer();
-    this.logger.info(
-      `🚀 Server started on http://localhost:${this.config.get('PORT')}`
-    );
+    this.logger.info(`🚀 Server started on ${getFullServerPath(this.config.get('HOST'), this.config.get('PORT'))}`);
 
     //test user down:
     // const user = await UserModel.create({
