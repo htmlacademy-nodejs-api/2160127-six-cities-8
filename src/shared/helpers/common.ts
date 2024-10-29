@@ -1,7 +1,7 @@
 import { ClassConstructor, plainToInstance } from 'class-transformer';
 import { ValidationError } from 'class-validator';
 
-import { ValidationErrorField } from '../libs/rest/index.js';
+import { ApplicationError, ValidationErrorField } from '../libs/rest/index.js';
 import {RangeType} from '../types/range.types.js';
 
 export function generateRandomValue(min: number, max: number, numAfterDigit = 0) {
@@ -41,10 +41,8 @@ export function getErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : '';
 }
 
-export function createErrorObject(message: string) {
-  return {
-    error: message,
-  };
+export function createErrorObject(errorType: ApplicationError, error: string, details: ValidationErrorField[] = []) {
+  return { errorType, error, details };
 }
 
 export function reduceValidationErrors(errors: ValidationError[]): ValidationErrorField[] {
