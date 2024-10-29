@@ -1,4 +1,4 @@
-import { MaxLength, MinLength, IsBoolean, IsEmail, Matches } from 'class-validator';
+import { MaxLength, MinLength, IsBoolean, IsEmail } from 'class-validator';
 
 import { CreateUserValidationMessage } from './create-user.messages.js';
 export class CreateUserDto {
@@ -9,8 +9,9 @@ export class CreateUserDto {
   @IsEmail({},{message:CreateUserValidationMessage.email.invalid})
   public email: string;
 
-  @Matches(/^.*(.png|.jpg)$/,{message: CreateUserValidationMessage.avatar.invalidFormat})
-  public avatar: string;
+  //Оставил кооменатрий ниже, чтобы сохранить для себя регулярку по проверки почты
+  // @Matches(/^.*(.png|.jpg)$/,{message: CreateUserValidationMessage.avatar.invalidFormat})
+  // public avatar: string;
 
   @MinLength(6, { message: CreateUserValidationMessage.password.minLength })
   @MaxLength(12, { message: CreateUserValidationMessage.password.maxLength })
