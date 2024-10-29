@@ -1,5 +1,7 @@
 import { ClassConstructor, plainToInstance } from 'class-transformer';
+import { ValidationError } from 'class-validator';
 
+import { ValidationErrorField } from '../libs/rest/index.js';
 import {RangeType} from '../types/range.types.js';
 
 export function generateRandomValue(min: number, max: number, numAfterDigit = 0) {
@@ -44,3 +46,12 @@ export function createErrorObject(message: string) {
     error: message,
   };
 }
+
+export function reduceValidationErrors(errors: ValidationError[]): ValidationErrorField[] {
+  return errors.map(({ property, value, constraints}) => ({
+    property,
+    value,
+    messages: constraints ? Object.values(constraints) : []
+  }));
+}
+
