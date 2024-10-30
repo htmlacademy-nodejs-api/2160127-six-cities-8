@@ -42,6 +42,7 @@ export class DefaultOfferService implements IOfferService {
   public async find(count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
     return this.offerModel
       .find({}, {}, { limit: count, skip: offset })
+      .sort({ createdDate: SortType.Down })
       .populate(['userId'])
       .exec();
   }
@@ -100,6 +101,7 @@ export class DefaultOfferService implements IOfferService {
   public async findFavorite(count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
     return this.offerModel
       .find({isFavorite: true}, {}, { limit: count, skip: offset })
+      .sort({ createdDate: SortType.Down })
       .populate(['userId'])
       .exec();
   }
@@ -107,6 +109,7 @@ export class DefaultOfferService implements IOfferService {
   public async findPremium(count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
     return this.offerModel
       .find({isPremium: true}, {}, { limit: count, skip: offset })
+      .sort({ createdDate: SortType.Down })
       .populate(['userId'])
       .exec();
   }
