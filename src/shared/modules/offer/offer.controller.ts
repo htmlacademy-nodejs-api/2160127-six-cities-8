@@ -9,7 +9,8 @@ import {
   ValidateObjectIdMiddleware,
   PrivateRouteMiddleware,
   ValidateDtoMiddleware,
-  DocumentExistsMiddleware } from '../../libs/rest/index.js';
+  DocumentExistsMiddleware,
+} from '../../libs/rest/index.js';
 import { ILogger } from '../../libs/logger/index.js';
 import { Component } from '../../types/index.js';
 import { IOfferService } from './offer-service.interface.js';
@@ -21,7 +22,7 @@ import { UpdateOfferDto } from './index.js';
 import { ICommentService } from '../comment/comment-service.interface.js';
 // import { CommentRdo } from '../comment/rdo/comment.rdo.js';
 import { CreateOfferDto } from './dto/create-offer.dto.js';
-
+// import { IConfig, RestSchema } from '../../libs/config/index.js';
 
 @injectable()
 export class OfferController extends BaseController {
@@ -29,6 +30,7 @@ export class OfferController extends BaseController {
     @inject(Component.Logger) protected readonly logger: ILogger,
     @inject(Component.OfferService) private readonly offerService: IOfferService,
     @inject(Component.CommentService) private readonly commentService: ICommentService,
+    // @inject(Component.Config) private readonly configService: IConfig<RestSchema>,
   ) {
     super(logger);
 
@@ -124,9 +126,17 @@ export class OfferController extends BaseController {
     this.noContent(res, offer);
   }
 
-  public async update({ body, params }: Request<ParamOfferId, unknown, UpdateOfferDto>, res: Response): Promise<void> {
+  public async update({ body, params, tokenPayload }: Request<ParamOfferId, unknown, UpdateOfferDto>, res: Response): Promise<void> {
     const updatedOffer = await this.offerService.updateById(params.offerId, body);
-    this.ok(res, fillDTO(OfferRdo, updatedOffer));
+    if(updatedOffer){
+      if (updatedOffer.userId.id === tokenPayload.id) {
+        this.ok(res, fillDTO(OfferRdo, updatedOffer));
+      } else {
+        this.forbidden(res, 'Offer is not yours');
+      }
+    } else {
+      this.noContent(res, params.offerId);
+    }
   }
 
   public async getComments({ params }: Request<ParamOfferId>, res: Response): Promise<void> {
@@ -144,5 +154,4 @@ export class OfferController extends BaseController {
     // TODO спросить у наставника
     this.ok(res, comments);
   }
-
 }

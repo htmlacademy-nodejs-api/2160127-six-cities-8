@@ -9,11 +9,11 @@ Content-Type: application/json
 ## Создание предложения
 POST  http://localhost:5000/offers/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQG1haWwyLnJ1IiwibmFtZSI6IlRFc3RVc2VyIiwiaXNQcm8iOnRydWUsImF2YXRhciI6IjEuaW1nIiwiaWQiOiI2NzBlOWNjY2NmYzgwMmViMzY3ZjgwODYiLCJpYXQiOjE3MzAxMjg0MDEsImV4cCI6MTczMDMwMTIwMX0.RvP1vZMY0vR3mskrqkn1SGoeFKOTMr-ZcshL56uOm1k
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWFpdzIyMjJsYUBtYWlsLnJ1IiwibmFtZSI6IlRFc3RVc2VyIiwiaXNQcm8iOnRydWUsImF2YXRhciI6ImRlZmF1bHQtYXZhdGFyLmpwZyIsImlkIjoiNjcyMGY1NjE4NGRhM2VmYmM1NzBkNDY0IiwiaWF0IjoxNzMwMzAzMzc5LCJleHAiOjE3MzA0NzYxNzl9.B3vwhnKHFTEXnFZdCGZp58A5DWMgcaLQGWxP0EWgjWQ
 
 {
   "title": "test offer",
-  "description": "test test",
+  "description": "test test test test test testtest test test test",
   "createdDate": "2027-08-14T04:02:02.487Z",
   "city": "Cologne",
   "location": "52.370216,4.895168",
@@ -25,7 +25,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQG1haWwyLnJ1Iiwib
   "OfferTypeEnum": "apartment",
   "bedrooms": 1,
   "quests": 3,
-  "price": 11,
+  "price": 1100,
   "features": ["Laptop friendly workspace","Baby seat","Washer","Towels","Fridge"]
 
 }
@@ -65,5 +65,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQG1haWwyLnJ1Iiwib
 ## Список комментариев к объявлению
 GET http://localhost:5000/offers/premiun HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQG1haWwyLnJ1IiwibmFtZSI6IlRFc3RVc2VyIiwiaXNQcm8iOnRydWUsImF2YXRhciI6IjEuaW1nIiwiaWQiOiI2NzBlOWNjY2NmYzgwMmViMzY3ZjgwODYiLCJpYXQiOjE3MzAxMjg0MDEsImV4cCI6MTczMDMwMTIwMX0.RvP1vZMY0vR3mskrqkn1SGoeFKOTMr-ZcshL56uOm1k
+
+###
+## Загрузить изображение для объявления
+POST http://localhost:5000/offers/66fe928984d10f086922abbc/image HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQG1haWwyLnJ1IiwibmFtZSI6IlRFc3RVc2VyIiwiaXNQcm8iOnRydWUsImF2YXRhciI6IjEuaW1nIiwiaWQiOiI2NzBlOWNjY2NmYzgwMmViMzY3ZjgwODYiLCJpYXQiOjE3MzAxMjg0MDEsImV4cCI6MTczMDMwMTIwMX0.RvP1vZMY0vR3mskrqkn1SGoeFKOTMr-ZcshL56uOm1k
+
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="screen.png"
+Content-Type: image/png
+
+< D:\Learn\HtmlAcademy\2160127-six-cities-8\upload\avatar.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ###
