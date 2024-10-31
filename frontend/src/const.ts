@@ -44,7 +44,7 @@ export enum AppRoute {
 export enum ApiRoute {
   Offers = '/offers',
   Login = '/users/login',
-  Logout = '/logout',
+  Logout = '/users/logout',
   Register = '/users/register',
   Users = '/users',
   Avatar = '/avatar',
