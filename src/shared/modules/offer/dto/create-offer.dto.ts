@@ -1,4 +1,4 @@
-import { IsArray, IsDateString, IsEnum, IsInt, Max, MaxLength, Min, MinLength, IsBoolean } from 'class-validator';
+import { IsArray, IsDateString, IsEnum, IsInt, Max, MaxLength, Min, MinLength, IsBoolean, IsOptional } from 'class-validator';
 
 import { CityName, OfferTypeEnum } from '../../../types/index.js';
 import { Features } from '../../../types/index.js';
@@ -15,6 +15,7 @@ export class CreateOfferDto {
   @MaxLength(1024, { message: CreateOfferValidationMessage.description.maxLength })
   public description: string;
 
+  @IsOptional()
   @IsDateString({}, { message: CreateOfferValidationMessage.createdDate.invalidFormat })
   public createdDate: Date;
 

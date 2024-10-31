@@ -14,7 +14,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWFpdzIyMjJsYUBtYWlsL
 {
   "title": "test offer",
   "description": "test test test test test testtest test test test",
-  "createdDate": "2027-08-14T04:02:02.487Z",
   "city": "Cologne",
   "location": "52.370216,4.895168",
   "previewImage": "preview/2.jpgs",
