@@ -38,7 +38,7 @@ export class OfferController extends BaseController {
 
     this.addRoute({ path: '/', method: HttpMethod.Get, handler: this.index });
     this.addRoute({
-      path: '/favorite',
+      path: '/favorites',
       method: HttpMethod.Get,
       handler: this.getFavorite,
       middlewares: [
