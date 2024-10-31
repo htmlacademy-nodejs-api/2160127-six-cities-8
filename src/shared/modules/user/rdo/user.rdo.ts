@@ -17,5 +17,5 @@ export class UserRdo {
   public password: string;
 
   @Expose()
-  public isPro: boolean;
+  public type: string;
 }

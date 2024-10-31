@@ -319,9 +319,9 @@ components:
           type: string
           example: http://avatars.ru/avatar.png
 
-        isPro:
-          type: boolean
-          example: true
+        type:
+          type: string
+          example: Pro
 
     User:
       type: object
@@ -339,9 +339,9 @@ components:
           type: string
           example: http://avatars.ru/avatar.png
 
-        isPro:
-          type: boolean
-          example: true
+        type:
+          type: string
+          example: pro
 
     LoginUser:
       type: object
@@ -371,9 +371,9 @@ components:
           type: string
           example: http://avatars.ru/avatar.png
 
-        isPro:
-          type: boolean
-          example: true
+        type:
+          type: string
+          example: pro
 
         token:
           type: string

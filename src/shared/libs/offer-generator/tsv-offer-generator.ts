@@ -1,6 +1,6 @@
 import {IOfferGenerator} from './offer-generator.interface.js';
 import {MockServerDataType} from '../../types/mock-server-data.type.js';
-import {OfferTypeEnum} from '../../types/index.js';
+import {OfferTypeEnum, UserTypeEnum} from '../../types/index.js';
 import {getRandomDate, getRandomItem, getRandomItems, getRandomBoolean, getRandomInRange} from '../../helpers/common.js';
 import {PriceLimit, RatingLimit, RoomLimit, QuestsLimit, CommentsLimit} from './const.js';
 
@@ -26,7 +26,7 @@ export class TSVOfferGenerator implements IOfferGenerator {
     const userName = getRandomItem(this.mockData.users);
     const avatarUrl = getRandomItem<string>(this.mockData.avatars);
     const password = getRandomItem<string>(this.mockData.passwords);
-    const isPro = getRandomBoolean();
+    const type = getRandomItem(Object.keys(UserTypeEnum));
     const email = getRandomItem<string>(this.mockData.emails);
     const location = getRandomItem<string>(this.mockData.coordinates);
     const comments = getRandomInRange(CommentsLimit);
@@ -50,7 +50,7 @@ export class TSVOfferGenerator implements IOfferGenerator {
       userName,
       avatarUrl,
       password,
-      isPro,
+      type,
       email,
       location,
       comments

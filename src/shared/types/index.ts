@@ -11,4 +11,5 @@ export { RangeType } from './range.types.js';
 export { User } from './user.type.js';
 export { SortType } from './sort-type.enum.js';
 export { IDocumentExists } from './document-exists.interface.js';
+export { UserTypeEnum } from './user-type.enum.js';
 

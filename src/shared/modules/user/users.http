@@ -12,7 +12,7 @@ Content-Type: application/json
   "name": "TEstUser",
   "email": "emaaiw22la@mail.ru",
   "password": "string",
-  "isPro": true
+  "type": "pro"
 }
 ###
 # Авторизовать пользователя

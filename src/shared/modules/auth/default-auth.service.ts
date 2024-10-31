@@ -25,7 +25,7 @@ export class DefaultAuthService implements AuthService {
     const tokenPayload: TokenPayload = {
       email: user.email,
       name: user.name,
-      isPro: user.isPro,
+      type: user.type,
       avatar: user.avatar,
       id: user.id,
     };

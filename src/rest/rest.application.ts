@@ -102,16 +102,5 @@ export class RestApplication {
     this.logger.info('Try to init server…');
     await this._initServer();
     this.logger.info(`🚀 Server started on ${getFullServerPath(this.config.get('HOST'), this.config.get('PORT'))}`);
-
-    //test user down:
-    // const user = await UserModel.create({
-    //   name: 'Keks',
-    //   email: 'test2@email.local',
-    //   avatarUrl: 'keks.jpg',
-    //   password: 'Unknown',
-    //   isPro: true
-    // });
-    // const error = user.validateSync();
-    // console.log(error);
   }
 }

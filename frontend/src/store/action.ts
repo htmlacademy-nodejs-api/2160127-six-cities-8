@@ -58,7 +58,7 @@ export const fetchOffer = createAsyncThunk<Offer, Offer['id'], { extra: Extra }>
     } catch (error) {
       const axiosError = error as AxiosError;
 
-      if (axiosError.response?.status === HttpCode.NotFound) {
+      if (axiosError.response?.status === HttpCode.NOT_FOUND) {
         history.push(AppRoute.NotFound);
       }
 
@@ -124,7 +124,7 @@ export const fetchUserStatus = createAsyncThunk<UserAuth['email'], undefined, { 
     } catch (error) {
       const axiosError = error as AxiosError;
 
-      if (axiosError.response?.status === HttpCode.NoAuth) {
+      if (axiosError.response?.status === HttpCode.UNAUTHORIZED) {
         Token.drop();
       }
 
@@ -167,7 +167,7 @@ export const registerUser = createAsyncThunk<void, UserRegister, { extra: Extra 
     if (avatar) {
       const payload = new FormData();
       payload.append('avatar', avatar);
-      await api.post(`/${data.id}${ApiRoute.Avatar}`, payload, {
+      await api.post(`${ApiRoute.Users}/${data.id}${ApiRoute.Avatar}`, payload, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
     }
@@ -200,7 +200,7 @@ export const postFavorite = createAsyncThunk<
   } catch (error) {
     const axiosError = error as AxiosError;
 
-    if (axiosError.response?.status === HttpCode.NoAuth) {
+    if (axiosError.response?.status === HttpCode.UNAUTHORIZED) {
       history.push(AppRoute.Login);
     }
 
@@ -224,7 +224,7 @@ export const deleteFavorite = createAsyncThunk<
   } catch (error) {
     const axiosError = error as AxiosError;
 
-    if (axiosError.response?.status === HttpCode.NoAuth) {
+    if (axiosError.response?.status === HttpCode.UNAUTHORIZED) {
       history.push(AppRoute.Login);
     }
 

@@ -13,7 +13,7 @@ export const CreateUserValidationMessage = {
     minLength: 'Minimum password length is 6 symbols',
     maxLength: 'Maximum password length is 12 symbols',
   },
-  isPro: {
-    invalid: 'type must be boolean',
+  type: {
+    invalid: 'type must be string',
   },
 } as const;

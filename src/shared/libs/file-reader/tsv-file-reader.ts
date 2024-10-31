@@ -35,7 +35,7 @@ export class TVSFileReader extends EventEmitter {
       userName,
       avatarUrl,
       password,
-      isPro,
+      type,
       email,
       location,
       comments
@@ -56,7 +56,7 @@ export class TVSFileReader extends EventEmitter {
       quests: parseInt(quests, 10),
       price: parseInt(price, 10),
       features: this.parseFeatures(features),
-      author: { name: userName, avatar:  avatarUrl, isPro: this.parseBoolean(isPro), email, password },
+      author: { name: userName, avatar:  avatarUrl, type: type, email, password },
       comments: parseInt(comments, 10),
       location: this.parseLocation(location)
     };
