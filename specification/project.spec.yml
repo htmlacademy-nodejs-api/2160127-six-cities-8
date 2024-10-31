@@ -468,19 +468,19 @@ components:
           type: boolean
           example: true
 
-        isFavorite:
-          type: boolean
-          example: true
+        # isFavorite:
+        #   type: boolean
+        #   example: true
 
-        rating:
-          type: number
-          example: 3.2
+        # rating:
+        #   type: number
+        #   example: 3.2
 
         bedrooms:
           type: number
           example: 3
 
-        quests:
+        maxAdults:
           type: number
           example: 2
 
@@ -488,7 +488,7 @@ components:
           type: number
           example: 600
 
-        features:
+        goods:
           type: array
           items:
             type: string
@@ -555,7 +555,7 @@ components:
           type: number
           example: 3
 
-        quests:
+        maxAdults:
           type: number
           example: 2
 
@@ -563,7 +563,7 @@ components:
           type: number
           example: 600
 
-        features:
+        goods:
           type: array
           items:
             type: string
@@ -612,13 +612,13 @@ components:
           type: boolean
           example: true
 
-        isFavorite:
-          type: boolean
-          example: true
+        # isFavorite:
+        #   type: boolean
+        #   example: true
 
-        rating:
-          type: number
-          example: 3.2
+        # rating:
+        #   type: number
+        #   example: 3.2
 
         OfferTypeEnum:
           type: OfferTypeEnum
@@ -629,7 +629,7 @@ components:
           type: number
           example: 3
 
-        quests:
+        maxAdults:
           type: number
           example: 2
 
@@ -637,7 +637,7 @@ components:
           type: number
           example: 600
 
-        features:
+        goods:
           type: array
           items:
             type: string

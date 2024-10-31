@@ -1,5 +1,5 @@
 import { City } from './city.type.js';
-import { Features } from './feature.type.js';
+import { Goods } from './feature.type.js';
 import { Location } from './location.type.js';
 import { OfferTypeEnum } from './offer-type.enum.js';
 import { User } from './user.type.js';
@@ -12,13 +12,13 @@ export type OfferType = {
   previewImage: string;
   images: string[];
   isPremium: boolean;
-  isFavorite: boolean;
-  rating: number;
+  // isFavorite: boolean;
+  // rating: number;
   hostType: OfferTypeEnum;
   bedrooms: number;
-  quests: number;
+  maxAdults: number;
   price: number;
-  features: Features[];
+  goods: Goods[];
   author: User;
   comments: number;
   location: Location;

@@ -22,14 +22,14 @@ export const CreateOfferValidationMessage = {
   isPremium: {
     invalid: 'type must be Boolean',
   },
-  isFavorite: {
-    invalid: 'type must be Buy and Sell',
-  },
-  rating: {
-    invalidFormat: 'Price must be an integer',
-    minValue: 'Minimum count is 1',
-    maxValue: 'Maximum count is 5',
-  },
+  // isFavorite: {
+  //   invalid: 'type must be Buy and Sell',
+  // },
+  // rating: {
+  //   invalidFormat: 'Price must be an integer',
+  //   minValue: 'Minimum count is 1',
+  //   maxValue: 'Maximum count is 5',
+  // },
   OfferTypeEnum: {
     invalid: 'type must be one of enum OfferTypeEnum',
   },
@@ -38,8 +38,8 @@ export const CreateOfferValidationMessage = {
     minValue: 'Minimum count is 1',
     maxValue: 'Maximum count is 8',
   },
-  quests: {
-    invalidFormat: 'Price must be an integer',
+  maxAdults: {
+    invalidFormat: 'maxAdults must be an integer',
     minValue: 'Minimum count is 1',
     maxValue: 'Maximum count is 10',
   },
@@ -48,8 +48,8 @@ export const CreateOfferValidationMessage = {
     minValue: 'Minimum price is 100',
     maxValue: 'Maximum price is 100000',
   },
-  features: {
-    invalidFormat: 'Field features must be an array',
+  goods: {
+    invalidFormat: 'Field goods must be an array',
     invalidId: 'Categories field must be an array of valid id',
   },
   userId: {

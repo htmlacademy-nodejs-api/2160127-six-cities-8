@@ -2,7 +2,7 @@ import {IOfferGenerator} from './offer-generator.interface.js';
 import {MockServerDataType} from '../../types/mock-server-data.type.js';
 import {OfferTypeEnum, UserTypeEnum} from '../../types/index.js';
 import {getRandomDate, getRandomItem, getRandomItems, getRandomBoolean, getRandomInRange} from '../../helpers/common.js';
-import {PriceLimit, RatingLimit, RoomLimit, QuestsLimit, CommentsLimit} from './const.js';
+import {PriceLimit, RoomLimit, QuestsLimit, CommentsLimit} from './const.js';
 
 export class TSVOfferGenerator implements IOfferGenerator {
   constructor(private readonly mockData: MockServerDataType) {}
@@ -16,13 +16,13 @@ export class TSVOfferGenerator implements IOfferGenerator {
     const previewImage = getRandomItem<string>(this.mockData.previews);
     const images = getRandomItems<string>(this.mockData.images);
     const isPremium = getRandomBoolean();
-    const isFavorite = getRandomBoolean();
-    const rating = getRandomInRange(RatingLimit, 1).toString();
+    // const isFavorite = getRandomBoolean();
+    // const rating = getRandomInRange(RatingLimit, 1).toString();
     const offerTypes = getRandomItem(Object.keys(OfferTypeEnum));
     const rooms = getRandomInRange(RoomLimit);
-    const quests = getRandomInRange(QuestsLimit);
+    const maxAdults = getRandomInRange(QuestsLimit);
     const price = getRandomInRange(PriceLimit);
-    const features = getRandomItems<string>(this.mockData.features).join(',');
+    const goods = getRandomItems<string>(this.mockData.goods).join(',');
     const userName = getRandomItem(this.mockData.users);
     const avatarUrl = getRandomItem<string>(this.mockData.avatars);
     const password = getRandomItem<string>(this.mockData.passwords);
@@ -40,13 +40,13 @@ export class TSVOfferGenerator implements IOfferGenerator {
       previewImage,
       images,
       isPremium,
-      isFavorite,
-      rating,
+      // isFavorite,
+      // rating,
       offerTypes,
       rooms,
-      quests,
+      maxAdults,
       price,
-      features,
+      goods,
       userName,
       avatarUrl,
       password,

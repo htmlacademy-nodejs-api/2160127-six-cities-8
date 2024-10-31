@@ -20,7 +20,7 @@
       "foto/8.jpg",
       "foto/9.jpg"
     ],
-    "features": ["Breakfast", "Air conditioning", "Laptop friendly workspace", "Baby seat", "Washer", "Towels", "Fridge"],
+    "goods": ["Breakfast", "Air conditioning", "Laptop friendly workspace", "Baby seat", "Washer", "Towels", "Fridge"],
     "users": ["Max Sheldon", "Jonh Brown", "Andy Sacks", "Brigite Laine", "Juliana Murr", "Tom Hanks", "Ruth Laslie", "Amanda Fox"],
     "emails": [
       "max@yahoo.com",

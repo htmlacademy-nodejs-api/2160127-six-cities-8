@@ -1,6 +1,6 @@
 import { UserEntity } from '../../modules/user/index.js';
 import { City } from '../../types/index.js';
-import { Features } from '../../types/index.js';
+import { Goods } from '../../types/index.js';
 import { Location } from '../../types/index.js';
 import { OfferTypeEnum } from '../../types/index.js';
 import {
@@ -44,11 +44,11 @@ export class IOfferEntity extends defaultClasses.TimeStamps {
   @prop({ required: true })
   public isPremium: boolean;
 
-  @prop({ required: true })
-  public isFavorite: boolean;
+  // @prop({ required: true })
+  // public isFavorite: boolean;
 
-  @prop({ required: true, max: 5, min: 1 })
-  public rating: number;
+  // @prop({ required: true, max: 5, min: 1 })
+  // public rating: number;
 
   @prop({ required: true, type: () => String, enum: OfferTypeEnum })
   public OfferTypeEnum: OfferTypeEnum;
@@ -57,13 +57,13 @@ export class IOfferEntity extends defaultClasses.TimeStamps {
   public bedrooms: number;
 
   @prop({ required: false, max: 10, min: 1 })
-  public quests: number;
+  public maxAdults: number;
 
   @prop({ required: true, max: 100000, min: 100 })
   public price: number;
 
   @prop({ required: true })
-  public features: Features[];
+  public goods: Goods[];
 
   @prop({
     ref: UserEntity,

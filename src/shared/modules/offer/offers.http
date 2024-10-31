@@ -23,14 +23,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWFpdzIyMjJsYUBtYWlsL
   "rating": 3,
   "OfferTypeEnum": "apartment",
   "bedrooms": 1,
-  "quests": 3,
+  "maxAdults": 3,
   "price": 1100,
-  "features": ["Laptop friendly workspace","Baby seat","Washer","Towels","Fridge"]
+  "goods": ["Laptop friendly workspace","Baby seat","Washer","Towels","Fridge"]
 
 }
 ###
 # Получить объявление по идентификатору
-GET http://localhost:5000/offers/67168132a3b51227a52ddd93 HTTP/1.1
+GET http://localhost:5000/offers/6723720e4bc547bc6dc0c32d HTTP/1.1
 
 ###
 

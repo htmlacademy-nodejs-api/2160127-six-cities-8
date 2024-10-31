@@ -1,6 +1,6 @@
 import { CityName } from '../city-name.enum';
 import { OfferTypeEnum } from '../offer-type.enum';
-import { Features } from '../feature.type';
+import { Goods } from '../feature.type';
 import { Location } from '../location.type';
 
 export class CreateOfferDto {
@@ -16,8 +16,8 @@ export class CreateOfferDto {
   public rating!: number;
   public OfferTypeEnum!: OfferTypeEnum;
   public bedrooms!: number;
-  public quests!: number;
+  public maxAdults!: number;
   public price!: number;
-  public features!: Features[];
+  public goods!: Goods[];
   public userId!: string;
 }
