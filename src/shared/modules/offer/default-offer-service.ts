@@ -13,6 +13,7 @@ import {
 import { UserEntity} from '../user/index.js';
 import { HttpError } from '../../libs/rest/index.js';
 import { StatusCodes } from 'http-status-codes';
+import { City, CityName, CityLocation } from '../../types/index.js';
 
 
 @injectable()
@@ -26,10 +27,17 @@ export class DefaultOfferService implements IOfferService {
   ) {}
 
   async create(dto: CreateOfferDto): Promise<OfferEntityDocument> {
-    const result = await this.offerModel.create(dto);
+    const result = await this.offerModel.create({...dto, city: this.getCity(dto.city)});
     this.logger.info(`New offer created: ${dto.title} ${dto.description} ${dto.createdDate}`);
 
     return result;
+  }
+
+  private getCity(cityName: CityName): City {
+    return {
+      name: cityName,
+      location: CityLocation[cityName]
+    };
   }
 
   findById(offerId: string): Promise<OfferEntityDocument | null> {
@@ -61,9 +69,9 @@ export class DefaultOfferService implements IOfferService {
       }
 
     }
-
+    const city = (dto.city) ? this.getCity(dto.city) : undefined;
     return this.offerModel
-      .findByIdAndUpdate(offerId, dto, {new: true})
+      .findByIdAndUpdate(offerId, { ...dto, city } , {new: true})
       .populate(['userId'])
       .exec();
   }

@@ -59,7 +59,7 @@ export class ImportCommand implements ICommand {
       isPremium: offer.isPremium,
       // isFavorite: offer.isFavorite,
       // rating: offer.rating,
-      OfferTypeEnum: offer.hostType,
+      type: offer.hostType,
       bedrooms: offer.bedrooms,
       maxAdults: offer.maxAdults,
       price: offer.price,

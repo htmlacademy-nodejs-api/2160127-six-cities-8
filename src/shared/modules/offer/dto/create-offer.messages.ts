@@ -1,3 +1,4 @@
+import { CityName } from '../../../types/index.js';
 export const CreateOfferValidationMessage = {
   title: {
     minLength: 'Minimum title length must be 10',
@@ -11,7 +12,7 @@ export const CreateOfferValidationMessage = {
     invalidFormat: 'createdDate must be a valid ISO date',
   },
   city: {
-    invalid: 'type must be one of enum City',
+    invalidFormat: `city must by one of ${Object.values(CityName).join(', ')}`
   },
   previewImage: {
     invalid: 'Must be ref to «image»',

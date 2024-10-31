@@ -1,6 +1,6 @@
-import { IsArray, IsDateString, IsEnum, IsInt, Max, MaxLength, Min, MinLength, IsBoolean, IsOptional } from 'class-validator';
+import { IsArray, IsDateString, IsInt, Max, MaxLength, Min, MinLength, IsBoolean, IsOptional } from 'class-validator';
 
-import { CityName, OfferTypeEnum } from '../../../types/index.js';
+import { CityName, OfferTypeEnum} from '../../../types/index.js';
 import { Goods } from '../../../types/index.js';
 import { Location } from '../../../types/index.js';
 import { CreateOfferValidationMessage } from './create-offer.messages.js';
@@ -19,7 +19,7 @@ export class CreateOfferDto {
   @IsDateString({}, { message: CreateOfferValidationMessage.createdDate.invalidFormat })
   public createdDate: Date;
 
-  @IsEnum(CityName, { message: CreateOfferValidationMessage.city.invalid })
+  //@IsEnum(getCity(CityName), { message: CreateOfferValidationMessage.city.invalidFormat })
   public city: CityName;
 
   public location: Location;
@@ -40,8 +40,8 @@ export class CreateOfferDto {
   // @Max(5, { message: CreateOfferValidationMessage.rating.maxValue })
   // public rating: number;
 
-  @IsEnum(OfferTypeEnum, { message: CreateOfferValidationMessage.OfferTypeEnum.invalid })
-  public OfferTypeEnum: OfferTypeEnum;
+  //@IsEnum(OfferTypeEnum, { message: CreateOfferValidationMessage.OfferTypeEnum.invalid })
+  public type: OfferTypeEnum;
 
   @IsInt({ message: CreateOfferValidationMessage.bedrooms.invalidFormat })
   @Min(1, { message: CreateOfferValidationMessage.bedrooms.minValue })

@@ -50,8 +50,8 @@ export class IOfferEntity extends defaultClasses.TimeStamps {
   // @prop({ required: true, max: 5, min: 1 })
   // public rating: number;
 
-  @prop({ required: true, type: () => String, enum: OfferTypeEnum })
-  public OfferTypeEnum: OfferTypeEnum;
+  @prop({ required: true, type: String })
+  public type: OfferTypeEnum;
 
   @prop({ required: true, max: 8, min: 1 })
   public bedrooms: number;
@@ -71,8 +71,8 @@ export class IOfferEntity extends defaultClasses.TimeStamps {
   })
   public userId: Ref<UserEntity>;
 
-  @prop({ required: true })
-  public location: Location;
+  @prop()
+  public location!: Location;
 }
 
 export const OfferModel = getModelForClass(IOfferEntity);

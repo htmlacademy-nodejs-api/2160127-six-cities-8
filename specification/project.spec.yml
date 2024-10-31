@@ -401,7 +401,7 @@ components:
           type: number
           example: 23.346329
 
-    OfferTypeEnum:
+    Type:
       type: string
       enum:
       - apartment
@@ -446,8 +446,8 @@ components:
           $ref: '#/components/schemas/Location'
 
         OfferType:
-          type: OfferTypeEnum
-          $ref: '#/components/schemas/OfferTypeEnum'
+          type: Type
+          $ref: '#/components/schemas/Type'
 
         previewImage:
           type: string
@@ -620,9 +620,9 @@ components:
         #   type: number
         #   example: 3.2
 
-        OfferTypeEnum:
-          type: OfferTypeEnum
-          $ref: '#/components/schemas/OfferTypeEnum'
+        Type:
+          type: Type
+          $ref: '#/components/schemas/Type'
 
 
         bedrooms:

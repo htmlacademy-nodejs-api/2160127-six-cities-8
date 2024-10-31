@@ -31,7 +31,7 @@ export class UpdateOfferDto {
   public createdDate?: Date;
 
   @IsOptional()
-  @IsEnum(CityName, { message: CreateOfferValidationMessage.city.invalid })
+  @IsEnum(CityName, { message: CreateOfferValidationMessage.city.invalidFormat })
   public city?: CityName;
 
   @IsOptional()

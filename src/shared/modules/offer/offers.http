@@ -21,7 +21,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWFpdzIyMjJsYUBtYWlsL
   "isPremium": false,
   "isFavorite": false,
   "rating": 3,
-  "OfferTypeEnum": "apartment",
+  "type": "apartment",
   "bedrooms": 1,
   "maxAdults": 3,
   "price": 1100,
