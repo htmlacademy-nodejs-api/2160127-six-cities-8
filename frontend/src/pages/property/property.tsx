@@ -46,9 +46,15 @@ const Property = (): JSX.Element | null => {
     }
   }, [params, dispatch]);
 
+  function getName (params: any): string {
+    return params.city.name.name;
+  }
+
   useEffect(() => {
     if (offer) {
-      dispatch(fetchPremiumOffers(offer.city.name));
+      const name = getName(offer);
+      console.log(name)
+      dispatch(fetchPremiumOffers(name));
     }
   }, [dispatch, offer]);
 

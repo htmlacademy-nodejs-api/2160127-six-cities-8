@@ -114,9 +114,10 @@ export class DefaultOfferService implements IOfferService {
       .exec();
   }
 
-  public async findPremium(count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
+  public async findPremium(cityName: string, count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
+    //const cityName = (dto.city) ? this.getCity(dto.city) : undefined;
     return this.offerModel
-      .find({isPremium: true}, {}, { limit: count, skip: offset })
+      .find({isPremium: true, city: cityName}, {}, { limit: count, skip: offset })
       .sort({ createdDate: SortType.Down })
       .populate(['userId'])
       .exec();

@@ -31,7 +31,9 @@ const currentCustomIcon = new Icon({
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
-
+function getName (params: any): string {
+  return params.name;
+}
 const Map = ({
   city,
   locations,
@@ -57,8 +59,7 @@ const Map = ({
 
         markers.push(marker);
       });
-
-      const { latitude: lat, longitude: lng } = CityLocation[city.name];
+      const { latitude: lat, longitude: lng } = CityLocation[getName(city.name)];
       map.setView({ lat, lng }, ZOOM);
     }
 

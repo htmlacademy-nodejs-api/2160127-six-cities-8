@@ -37,15 +37,15 @@ export class OfferController extends BaseController {
     this.logger.info('Register routes for OfferController…');
 
     this.addRoute({ path: '/', method: HttpMethod.Get, handler: this.index });
+    // this.addRoute({
+    //   path: '/favorites',
+    //   method: HttpMethod.Get,
+    //   handler: this.getFavorite,
+    //   middlewares: [
+    //     new PrivateRouteMiddleware()]
+    // });
     this.addRoute({
-      path: '/favorites',
-      method: HttpMethod.Get,
-      handler: this.getFavorite,
-      middlewares: [
-        new PrivateRouteMiddleware()]
-    });
-    this.addRoute({
-      path: '/premiun',
+      path: '/premium',
       method: HttpMethod.Get,
       handler: this.getPremium,
       middlewares: [
@@ -94,16 +94,19 @@ export class OfferController extends BaseController {
     this.ok(res, fillDTO(OfferRdo, offers));
   }
 
-  public async getFavorite(_req: Request, res: Response): Promise<void> {
-    const offers = await this.offerService.findFavorite();
-    //this.ok(res, offers);
-    this.ok(res, fillDTO(OfferRdo, offers));
-  }
+  // public async getFavorite(_req: Request, res: Response): Promise<void> {
+  //   const offers = await this.offerService.findFavorite();
+  //   //this.ok(res, offers);
+  //   this.ok(res, fillDTO(OfferRdo, offers));
+  // }
 
-  public async getPremium(_req: Request, res: Response): Promise<void> {
-    const offers = await this.offerService.findPremium();
-    //this.ok(res, offers);
-    this.ok(res, fillDTO(OfferRdo, offers));
+  public async getPremium(req: Request, res: Response): Promise<void> {
+    if (typeof req.query.city === 'string') {
+      const offers = await this.offerService.findPremium(req.query.city);
+      // this.ok(res, offers);
+      this.ok(res, fillDTO(OfferRdo, offers));
+    }
+    throw Error('cityName is empty');
   }
 
   public async show({ params }: Request<ParamOfferId>, res: Response): Promise<void> {

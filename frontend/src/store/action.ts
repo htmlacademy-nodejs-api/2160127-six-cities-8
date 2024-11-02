@@ -1,7 +1,7 @@
 import type { History } from 'history';
 import type { AxiosInstance, AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { UserAuth, User, Offer, Comment, CommentAuth, FavoriteAuth, UserRegister, NewOffer } from '../types/types';
+import type { UserAuth, User, Offer, Comment, CommentAuth, FavoriteAuth, UserRegister, NewOffer, City, CityName } from '../types/types';
 import { ApiRoute, AppRoute, HttpCode } from '../const';
 import { Token } from '../utils';
 
@@ -94,7 +94,7 @@ export const deleteOffer = createAsyncThunk<void, string, { extra: Extra }>(
     history.push(AppRoute.Root);
   });
 
-export const fetchPremiumOffers = createAsyncThunk<Offer[], string, { extra: Extra }>(
+export const fetchPremiumOffers = createAsyncThunk<Offer[], CityName, { extra: Extra }>(
   Action.FETCH_PREMIUM_OFFERS,
   async (cityName, { extra }) => {
     const { api } = extra;

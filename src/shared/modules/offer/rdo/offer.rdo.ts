@@ -55,5 +55,5 @@ export class OfferRdo {
 
   @Expose({ name: 'userId' })
   @Type(() => UserRdo)
-  public user: UserRdo;
+  public host: UserRdo;
 }
