@@ -1,7 +1,7 @@
 export type TokenPayload = {
   email: string;
   name: string;
-  isPro: boolean;
+  type: string;
   avatar: string;
   id: string;
 };

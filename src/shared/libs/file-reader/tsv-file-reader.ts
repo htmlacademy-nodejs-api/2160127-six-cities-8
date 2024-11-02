@@ -1,6 +1,6 @@
 // import {IFileReader} from './file-reader.interface.js';
 import { createReadStream } from 'node:fs';
-import {OfferType, Location, OfferTypeEnum, Features, CityName} from '../../types/index.js';
+import {OfferType, Location, OfferTypeEnum, Goods, CityName} from '../../types/index.js';
 //import {readFileSync} from 'node:fs';
 import EventEmitter from 'node:events';
 // import chalk from 'chalk';
@@ -25,17 +25,17 @@ export class TVSFileReader extends EventEmitter {
       previewImage,
       images,
       isPremium,
-      isFavorite,
-      rating,
+      // isFavorite,
+      // rating,
       hostType,
       rooms,
-      quests,
+      maxAdults,
       price,
-      features,
+      goods,
       userName,
       avatarUrl,
       password,
-      isPro,
+      type,
       email,
       location,
       comments
@@ -49,14 +49,14 @@ export class TVSFileReader extends EventEmitter {
       previewImage,
       images: images.split(';'),
       isPremium: this.parseBoolean(isPremium),
-      isFavorite: isFavorite === 'true',
-      rating: parseInt(rating, 10),
+      // isFavorite: isFavorite === 'true',
+      // rating: parseInt(rating, 10),
       hostType: OfferTypeEnum[hostType as OfferTypeEnum],
       bedrooms: parseInt(rooms, 10),
-      quests: parseInt(quests, 10),
+      maxAdults: parseInt(maxAdults, 10),
       price: parseInt(price, 10),
-      features: this.parseFeatures(features),
-      author: { name: userName, avatar:  avatarUrl, isPro: this.parseBoolean(isPro), email, password },
+      goods: this.parseGoods(goods),
+      author: { name: userName, avatar:  avatarUrl, type: type, email, password },
       comments: parseInt(comments, 10),
       location: this.parseLocation(location)
     };
@@ -76,13 +76,13 @@ export class TVSFileReader extends EventEmitter {
     return {latitude, longitude};
   }
 
-  private parseFeatures(features: string): Features[] {
-    return features.split(',').map((name) => {
-      const featuresEnumValue = Features[name.trim() as Features];
-      if (featuresEnumValue) {
-        return featuresEnumValue;
+  private parseGoods(goods: string): Goods[] {
+    return goods.split(',').map((name) => {
+      const goodsEnumValue = Goods[name.trim() as Goods];
+      if (goodsEnumValue) {
+        return goodsEnumValue;
       } else {
-        throw new Error(`Invalid features: ${name}`);
+        throw new Error(`Invalid goods: ${name}`);
       }
     });
   }

@@ -11,7 +11,7 @@ import { IsArray,
   IsOptional } from 'class-validator';
 
 import { CityName, OfferTypeEnum } from '../../../types/index.js';
-import { Features } from '../../../types/index.js';
+import { Goods } from '../../../types/index.js';
 import { Location } from '../../../types/index.js';
 import { CreateOfferValidationMessage } from './create-offer.messages.js';
 
@@ -31,7 +31,7 @@ export class UpdateOfferDto {
   public createdDate?: Date;
 
   @IsOptional()
-  @IsEnum(CityName, { message: CreateOfferValidationMessage.city.invalid })
+  @IsEnum(CityName, { message: CreateOfferValidationMessage.city.invalidFormat })
   public city?: CityName;
 
   @IsOptional()
@@ -48,15 +48,15 @@ export class UpdateOfferDto {
   @IsBoolean({ message: CreateOfferValidationMessage.isPremium.invalid })
   public isPremium?: boolean;
 
-  @IsOptional()
-  @IsBoolean({ message: CreateOfferValidationMessage.isFavorite.invalid })
-  public isFavorite?: boolean;
+  // @IsOptional()
+  // @IsBoolean({ message: CreateOfferValidationMessage.isFavorite.invalid })
+  // public isFavorite?: boolean;
 
-  @IsOptional()
-  @IsInt({ message: CreateOfferValidationMessage.rating.invalidFormat })
-  @Min(1, { message: CreateOfferValidationMessage.rating.minValue })
-  @Max(5, { message: CreateOfferValidationMessage.rating.maxValue })
-  public rating?: number;
+  // @IsOptional()
+  // @IsInt({ message: CreateOfferValidationMessage.rating.invalidFormat })
+  // @Min(1, { message: CreateOfferValidationMessage.rating.minValue })
+  // @Max(5, { message: CreateOfferValidationMessage.rating.maxValue })
+  // public rating?: number;
 
   @IsOptional()
   @IsEnum(OfferTypeEnum, { message: CreateOfferValidationMessage.OfferTypeEnum.invalid })
@@ -69,10 +69,10 @@ export class UpdateOfferDto {
   public bedrooms?: number;
 
   @IsOptional()
-  @IsInt({ message: CreateOfferValidationMessage.quests.invalidFormat })
-  @Min(1, { message: CreateOfferValidationMessage.quests.minValue })
-  @Max(10, { message: CreateOfferValidationMessage.quests.maxValue })
-  public quests?: number;
+  @IsInt({ message: CreateOfferValidationMessage.maxAdults.invalidFormat })
+  @Min(1, { message: CreateOfferValidationMessage.maxAdults.minValue })
+  @Max(10, { message: CreateOfferValidationMessage.maxAdults.maxValue })
+  public maxAdults?: number;
 
   @IsOptional()
   @IsInt({ message: CreateOfferValidationMessage.price.invalidFormat })
@@ -81,8 +81,8 @@ export class UpdateOfferDto {
   public price?: number;
 
   @IsOptional()
-  @IsArray({message: CreateOfferValidationMessage.features.invalidFormat})
-  public features?: Features[];
+  @IsArray({message: CreateOfferValidationMessage.goods.invalidFormat})
+  public goods?: Goods[];
 
   @IsOptional()
   @IsMongoId({ message: CreateOfferValidationMessage.userId.invalidId })

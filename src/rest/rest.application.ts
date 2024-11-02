@@ -21,6 +21,7 @@ export class RestApplication {
     @inject(Component.OfferController) private readonly offerController: IController,
     @inject(Component.UserController) private readonly userController: IController,
     @inject(Component.CommentController) private readonly commentController: IController,
+    @inject(Component.FavoritesController) private readonly favoriteController: IController,
     @inject(Component.ExceptionFilter) private readonly appExceptionFilter: ExceptionFilter,
     @inject(Component.AuthExceptionFilter) private readonly authExceptionFilter: ExceptionFilter,
     @inject(Component.HttpExceptionFilter) private readonly httpExceptionFilter: ExceptionFilter,
@@ -60,6 +61,7 @@ export class RestApplication {
     this.server.use('/offers', this.offerController.router);
     this.server.use('/users', this.userController.router);
     this.server.use('/comments', this.commentController.router);
+    this.server.use('/favorites', this.favoriteController.router);
   }
 
   private async _initMiddleware() {
@@ -102,16 +104,5 @@ export class RestApplication {
     this.logger.info('Try to init server…');
     await this._initServer();
     this.logger.info(`🚀 Server started on ${getFullServerPath(this.config.get('HOST'), this.config.get('PORT'))}`);
-
-    //test user down:
-    // const user = await UserModel.create({
-    //   name: 'Keks',
-    //   email: 'test2@email.local',
-    //   avatarUrl: 'keks.jpg',
-    //   password: 'Unknown',
-    //   isPro: true
-    // });
-    // const error = user.validateSync();
-    // console.log(error);
   }
 }

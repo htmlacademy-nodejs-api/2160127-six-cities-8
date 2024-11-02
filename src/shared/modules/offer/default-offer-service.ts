@@ -13,6 +13,7 @@ import {
 import { UserEntity} from '../user/index.js';
 import { HttpError } from '../../libs/rest/index.js';
 import { StatusCodes } from 'http-status-codes';
+import { City, CityName, CityLocation } from '../../types/index.js';
 
 
 @injectable()
@@ -26,10 +27,17 @@ export class DefaultOfferService implements IOfferService {
   ) {}
 
   async create(dto: CreateOfferDto): Promise<OfferEntityDocument> {
-    const result = await this.offerModel.create(dto);
+    const result = await this.offerModel.create({...dto, city: this.getCity(dto.city)});
     this.logger.info(`New offer created: ${dto.title} ${dto.description} ${dto.createdDate}`);
 
     return result;
+  }
+
+  private getCity(cityName: CityName): City {
+    return {
+      name: cityName,
+      location: CityLocation[cityName]
+    };
   }
 
   findById(offerId: string): Promise<OfferEntityDocument | null> {
@@ -42,6 +50,7 @@ export class DefaultOfferService implements IOfferService {
   public async find(count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
     return this.offerModel
       .find({}, {}, { limit: count, skip: offset })
+      .sort({ createdDate: SortType.Down })
       .populate(['userId'])
       .exec();
   }
@@ -60,9 +69,9 @@ export class DefaultOfferService implements IOfferService {
       }
 
     }
-
+    const city = (dto.city) ? this.getCity(dto.city) : undefined;
     return this.offerModel
-      .findByIdAndUpdate(offerId, dto, {new: true})
+      .findByIdAndUpdate(offerId, { ...dto, city } , {new: true})
       .populate(['userId'])
       .exec();
   }
@@ -100,13 +109,16 @@ export class DefaultOfferService implements IOfferService {
   public async findFavorite(count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
     return this.offerModel
       .find({isFavorite: true}, {}, { limit: count, skip: offset })
+      .sort({ createdDate: SortType.Down })
       .populate(['userId'])
       .exec();
   }
 
-  public async findPremium(count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
+  public async findPremium(cityName: string, count: number = DEFAULT_OFFER_COUNT, offset: number = 0): Promise<DocumentType<IOfferEntity>[]> {
+    //const cityName = (dto.city) ? this.getCity(dto.city) : undefined;
     return this.offerModel
-      .find({isPremium: true}, {}, { limit: count, skip: offset })
+      .find({isPremium: true, city: cityName}, {}, { limit: count, skip: offset })
+      .sort({ createdDate: SortType.Down })
       .populate(['userId'])
       .exec();
   }

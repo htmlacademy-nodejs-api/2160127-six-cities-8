@@ -14,7 +14,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWFpdzIyMjJsYUBtYWlsL
 {
   "title": "test offer",
   "description": "test test test test test testtest test test test",
-  "createdDate": "2027-08-14T04:02:02.487Z",
   "city": "Cologne",
   "location": "52.370216,4.895168",
   "previewImage": "preview/2.jpgs",
@@ -22,16 +21,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWFpdzIyMjJsYUBtYWlsL
   "isPremium": false,
   "isFavorite": false,
   "rating": 3,
-  "OfferTypeEnum": "apartment",
+  "type": "apartment",
   "bedrooms": 1,
-  "quests": 3,
+  "maxAdults": 3,
   "price": 1100,
-  "features": ["Laptop friendly workspace","Baby seat","Washer","Towels","Fridge"]
+  "goods": ["Laptop friendly workspace","Baby seat","Washer","Towels","Fridge"]
 
 }
 ###
 # Получить объявление по идентификатору
-GET http://localhost:5000/offers/67168132a3b51227a52ddd93 HTTP/1.1
+GET http://localhost:5000/offers/6723720e4bc547bc6dc0c32d HTTP/1.1
 
 ###
 
@@ -63,7 +62,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQG1haWwyLnJ1Iiwib
 
 ###
 ## Список комментариев к объявлению
-GET http://localhost:5000/offers/premiun HTTP/1.1
+GET http://localhost:5000/offers/premiun?city=Paris HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImVtYWlsQG1haWwyLnJ1IiwibmFtZSI6IlRFc3RVc2VyIiwiaXNQcm8iOnRydWUsImF2YXRhciI6IjEuaW1nIiwiaWQiOiI2NzBlOWNjY2NmYzgwMmViMzY3ZjgwODYiLCJpYXQiOjE3MzAxMjg0MDEsImV4cCI6MTczMDMwMTIwMX0.RvP1vZMY0vR3mskrqkn1SGoeFKOTMr-ZcshL56uOm1k
 
 ###

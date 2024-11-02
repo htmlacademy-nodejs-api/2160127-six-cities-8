@@ -17,6 +17,6 @@ export interface IOfferService extends IDocumentExists {
   findNew(count: number): Promise<DocumentType<IOfferEntity>[]>;
   findDiscussed(count: number): Promise<DocumentType<IOfferEntity>[]>;
   exists(documentId: string): Promise<boolean>;
-  findPremium(): Promise<DocumentType<IOfferEntity>[]>;
+  findPremium(city: string): Promise<DocumentType<IOfferEntity>[]>;
   findFavorite(): Promise<DocumentType<IOfferEntity>[]>;
 }

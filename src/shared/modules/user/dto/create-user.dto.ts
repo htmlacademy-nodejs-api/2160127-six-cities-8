@@ -1,4 +1,4 @@
-import { MaxLength, MinLength, IsBoolean, IsEmail } from 'class-validator';
+import { MaxLength, MinLength, IsEmail } from 'class-validator';
 
 import { CreateUserValidationMessage } from './create-user.messages.js';
 export class CreateUserDto {
@@ -17,6 +17,5 @@ export class CreateUserDto {
   @MaxLength(12, { message: CreateUserValidationMessage.password.maxLength })
   public password: string;
 
-  @IsBoolean({ message: CreateUserValidationMessage.isPro.invalid })
-  public isPro: boolean;
+  public type: string;
 }

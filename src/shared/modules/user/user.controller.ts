@@ -60,6 +60,12 @@ export class UserController extends BaseController {
       method: HttpMethod.Get,
       handler: this.checkAuthenticate,
     });
+
+    this.addRoute({
+      path: '/logout',
+      method: HttpMethod.Delete,
+      handler: this.logout
+    });
   }
 
   public async index(_req: Request, res: Response): Promise<void> {
@@ -117,6 +123,11 @@ export class UserController extends BaseController {
     }
 
     this.ok(res, fillDTO(LoggedUserRdo, foundedUser));
+  }
+
+  public async logout(_req: Request, res: Response): Promise<void> {
+    //ничего не выполняем, т.к. токен нужно забыть на клиентской стороне
+    this.noContent(res, 'logout');
   }
 
 }
